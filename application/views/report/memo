@@ -1,0 +1,84 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+  <section class="content-header text-capitalize">
+    <h1>internal memo</h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="box">
+          <div class="box-header text-capitalize"><h3 class="box-title">internal memo</h3></div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-striped table-hover">
+                <tbody>
+                  <tr>
+                    <th class="text-capitalize">date</th>
+                    <th class="text-capitalize"></th>
+                  </tr>
+                  <tr>
+                    <th class="text-capitalize">no</th>
+                    <th class="text-capitalize"></th>
+                  </tr>
+                  <tr>
+                    <th class="text-capitalize">from</th>
+                    <th class="text-capitalize"></th>
+                  </tr>
+                  <tr>
+                    <th class="text-capitalize">to</th>
+                    <th class="text-capitalize"></th>
+                  </tr>
+                  <tr>
+                    <th class="text-capitalize">cc</th>
+                    <th class="text-capitalize"></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+f            <div class="col-xs-12 text-capitalize"><h4>subject</h4></div>
+            <div class="col-xs-12"><p>text</p></div>
+            <div class="col-xs-12">item</div>
+            <div class="col-xs-12"><p>text ending</p></div>
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-striped table-hover">
+                <tbody>
+                  <tr>
+                    <th width="33%" class="text-center">Pemohon</th>
+                    <th width="33%" class="text-center">Mengetahui</th>
+                    <th width="33%" class="text-center">Mengetahui</th>
+                  </tr>
+                  <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                  </tr>
+                  <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center">Menyetujui</th>
+                    <th class="text-center"></th>
+                  </tr>
+                  <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <!-- /.box-body -->
+        </div>
+      <!-- /.box -->
+      </div>
+    <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

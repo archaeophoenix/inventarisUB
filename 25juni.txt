@@ -1,0 +1,90 @@
+data barang masuk
+tipe purchase [stok/beli]
+tabel stok barang [ada edit untuk bagian label barang, barangnya ada dimana, pemohon siapa]-link dari Purchase order
+
+
+7jabatan
+
+1 ['staff'][6]
+2 ['kabag'][6]
+3 ['kaprodi']
+4 ['kabiro'][6]
+5 ['dekan']
+6 ['warek']
+7 ['rektor']
+
+
+report memo stok
+-pemohon/staff biasa
+-atasan staff biasa (kabag/kabiro/kaprodi/)
+
+
+report memo beli
+-pemohon/staff biasa
+-atasan staff biasa (Kabiro/Kabag/Kaprodi/dekan)
+-Warek
+-Rektor
+
+report permintaan beli &stok
+-pemohon
+-atasan staff biasa (Kabiro/Kabag/Kaprodi/dekan)
+-kabag/kabiro umum
+
+
+canvas &purchase
+- purchaser
+- kabag umum
+- kabiro umum
+
+order
+- kabag keuangan
+- kabiro umum
+
+pembayaran
+-pemohon
+-atasan staff biasa (Kabiro/Kabag/Kaprodi)
+-warek
+-rektor
+-purchaser
+-staff keuangan
+-kabiro keuangan
+
+
+LAYOUT
+
+staff
+-Staff 
+(+purchase)(xkonfirmasi)(xreport)
+-kabag/kabiro/kaprodi/dekan 
+(xpurchase)(+konfirmasi)(xreport)
+-warek/Rektor 
+(xpurchase)(+konfirmasi)(+report)
+
+keuangan 
+-staff keuangan
+(+purchase)
+-kabag/kabiro keuangan
+(-purchase)
+
+admin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

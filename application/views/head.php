@@ -37,19 +37,17 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">Admin</span>
+              <span class="hidden-xs"><?php echo $_SESSION['masuk']['nama']; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <p>
-                  Admin
-                </p>
+                <p><?php echo $_SESSION['masuk']['nama'].' ('.$_SESSION['masuk']['gelar'].')'; ?></p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <button class="btn btn-default btn-flat" type="button" onclick="window.location='<?php echo base_url() ?>log/out'">Keluar</button>
                 </div>
               </li>
             </ul>
@@ -71,13 +69,21 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <?php $path = explode('/',$_SERVER['PATH_INFO']);?>
+        <?php if ($_SESSION['masuk']['status'] != 1){ ?>
         <li <?php echo ($path[1] == 'purchase' || $path[1] == 'report' && $path[2] != 'supplier') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>purchase"><i class="fa fa-th"></i> <span>Purchase</span></a></li>
+        <?php } ?>
         <li <?php echo ($path[1] == 'vendor') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>vendor"><i class="fa fa-group"></i><span>Vendor</span></a></li>
+        <?php if ($_SESSION['masuk']['status'] == 1){ ?>
         <li <?php echo ($path[1] == 'barang') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>barang"><i class="fa fa-cubes"></i><span>Barang</span></a></li>
+        <?php } if ($_SESSION['masuk']['status'] == 1){ ?>
         <li <?php echo ($path[1] == 'harga') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>harga"><i class="fa fa-money"></i><span>Harga</span></a></li>
+        <?php } ?>
         <li <?php echo ($path[1] == 'report' && $path[2] == 'supplier') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>report/supplier"><i class="fa fa-edit"></i><span>Kinerja Vendor</span></a></li>
+        <?php if ($_SESSION['masuk']['status'] == 1){ ?>
         <li <?php echo ($path[1] == 'pengguna') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>pengguna"><i class="fa fa-user"></i><span>Pengguna</span></a></li>
+        <?php } if ($_SESSION['masuk']['status'] == 1){ ?>
         <li <?php echo ($path[1] == 'biro') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>biro"><i class="fa fa-flag"></i><span>Biro</span></a></li>
+        <?php } ?>
         <li <?php echo ($path[1] == 'inventaris') ? 'class="active"' : '' ; ?> "><a href="<?php echo base_url(); ?>report/inventaris"><i class="fa fa-cube"></i><span>Inventaris</span></a>
         </li>
       </ul>

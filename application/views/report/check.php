@@ -110,7 +110,10 @@
             <?php } else { ?>
               <button type="button" class="btn btn-info btn-circle" title="Edit" onclick="window.location='<?php echo url . '/edit'; ?>'"><i class="fa fa-pencil-square-o"></i></button>
               <button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
-            <?php } ?>
+            <?php if(!empty($ctanggal)){ ?>
+              <button type="button" class="btn btn-primary btn-circle" title="Kinerja Vendor" onclick="window.location='<?php echo base_url().'report/kinerja/'.$id_vendor ?>'"><i class="fa fa-angle-right"></i></button>
+              <?php }
+            } ?>
             </div>
           </form>
         </div>

@@ -15,7 +15,7 @@ class Report extends CI_Controller {
 	}
 
 	function purchase($id){
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama staff,pur.nik nik_staff');
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama staff,pur.nik nik_staff,level');
 		$data['purchase']['item'] = $this->putem($id);
 		$this->load->view('head');
 		$this->load->view('report/purchase',$data);
@@ -24,7 +24,7 @@ class Report extends CI_Controller {
 
 	function permintaan($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal, type, ref, biro.nama biro ,purchase.status, kab.nama kabiro,kab.nik nik_kabiro,pur.nama purchaser,pur.nik nik_purchaser, kab.nama atasan,kab.nik nik_atasan,pur.nama pengaju,pur.nik nik_pengaju ,note');
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal, type, ref, biro.nama biro ,purchase.status, kab.nama kabiro,kab.nik nik_kabiro,pur.nama purchaser,pur.nik nik_purchaser, kab.nama atasan,kab.nik nik_atasan,pur.nama pengaju,pur.nik nik_pengaju ,note,level');
 		$inventaris = $this->Dml_model->read('inventaris','WHERE id_purchase = '.$id,'id');
 		$data['inventaris'] = (empty($inventaris)) ? 0 : 1 ;
 		$data['purchase']['item'] = $this->putem($id);
@@ -35,7 +35,7 @@ class Report extends CI_Controller {
 
 	function order($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN pengguna kab ON kab.id = kabiro JOIN pengguna kak ON kak.id = kakeuangan WHERE purchase.id = '.$id,'purchase.id, purchase.to, phone, fax, attn, dates, po, delivery, payment, other, signature, sname, sdate, kak.nama kakeuangan, kak.nik nik_kakeuangan, kab.nama kabiro, kab.nik nik_kabiro, ref');
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN pengguna kab ON kab.id = kabiro JOIN pengguna kak ON kak.id = kakeuangan WHERE purchase.id = '.$id,'purchase.id, purchase.to, phone, fax, attn, dates, po, delivery, payment, other, signature, sname, sdate, kak.nama kakeuangan, kak.nik nik_kakeuangan, kab.nama kabiro, kab.nik nik_kabiro, ref, level');
 		$data['purchase']['item'] = $this->putem($id);
 		$this->load->view('head');
 		$this->load->view('report/order',$data);
@@ -52,7 +52,7 @@ class Report extends CI_Controller {
 
 	function pembayaran($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN pengguna pen ON purchaser = pen.id JOIN pengguna war ON wareknonakademik = war.id JOIN pengguna rek ON rektor = rek.id JOIN pengguna keu ON keuangan = keu.id JOIN pengguna kak ON kakeuangan = kak.id WHERE purchase.id = '.$id,'purchase.id,pen.nama pengaju, pen.nik nik_pengaju, war.nama wareknonakademik, war.nik nik_wareknonakademik, rek.nama rektor, rek.nik nik_rektor, keu.nama keuangan, keu.nik nik_keuangan, kak.nama kakeuangan, kak.nik nik_kakeuangan,akun,kepada,dari,nomor,tanggalbayar,perihal,purchase.nama,bank,rekening'); 
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN pengguna pen ON purchaser = pen.id JOIN pengguna war ON wareknonakademik = war.id JOIN pengguna rek ON rektor = rek.id JOIN pengguna keu ON keuangan = keu.id JOIN pengguna kak ON kakeuangan = kak.id WHERE purchase.id = '.$id,'purchase.id,pen.nama pengaju, pen.nik nik_pengaju, war.nama wareknonakademik, war.nik nik_wareknonakademik, rek.nama rektor, rek.nik nik_rektor, keu.nama keuangan, keu.nik nik_keuangan, kak.nama kakeuangan, kak.nik nik_kakeuangan,akun,kepada,dari,nomor,tanggalbayar,perihal,purchase.nama,bank,rekening,level'); 
 		$atasan =  $this->Dml_model->one('pengguna pur','JOIN pengguna ata ON pur.id_atasan = ata.id WHERE pur.nik = '.$data['purchase']['nik_pengaju'],'ata.nama atasan, ata.nik nik_atasan');
 		$data['purchase'] = array_replace_recursive($data['purchase'],$atasan);
 		$data['purchase']['item'] = $this->putem($id);
@@ -75,7 +75,7 @@ class Report extends CI_Controller {
 
 	function canvas($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kabiro = kab.id JOIN pengguna pur ON purchaser = pur.id WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama purchaser,pur.nik nik_purchaser,note,ket');
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kabiro = kab.id JOIN pengguna pur ON purchaser = pur.id WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama purchaser,pur.nik nik_purchaser,note,ket,level');
 
 		$data['item'] = $this->putem($id);
 
@@ -133,7 +133,7 @@ class Report extends CI_Controller {
 	function terima($id = null, $edit = null){
 		$data['id'] = $id;
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','WHERE id = '.$id,'id,serah, nik_serah, terima,nik_terima, tanggal_terima');
+		$data['purchase'] = $this->Dml_model->one('purchase','WHERE id = '.$id,'id,serah, nik_serah, terima,nik_terima, tanggal_terima, level');
 		$putem = $this->putem($id);
 		$inventaris = $this->Dml_model->read('inventaris','WHERE id_purchase = '.$id.' ORDER BY id_barang ASC','id_barang, alokasi');
 		$data['purchase']['item'] = (empty($inventaris)) ? $putem : array_replace_recursive($putem, $inventaris);
@@ -175,7 +175,7 @@ class Report extends CI_Controller {
 
 	function valid($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna keu ON keu.id = keuangan JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,ket,biro.nama biro,dekan,nik_dekan,pustaka,nik_pustaka,purchase.status,keu.nama keuangan,keu.nik nik_keuangan,pur.nama staff,pur.nik nik_staff');
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna keu ON keu.id = keuangan JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,ket,biro.nama biro,dekan,nik_dekan,pustaka,nik_pustaka, level, purchase.status,keu.nama keuangan,keu.nik nik_keuangan,pur.nama staff,pur.nik nik_staff');
 		$data['purchase']['item'] = $this->putem($id);
 		$this->load->view('head');
 		$this->load->view('report/valid',$data);
@@ -193,7 +193,7 @@ class Report extends CI_Controller {
 
 	function biro($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id, deskripsi, fasilitas, keterangan, estimasi, prioritas, pengadaan ,input,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama staff,pur.nik nik_staff');
+		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id, deskripsi, fasilitas, keterangan, estimasi, prioritas, pengadaan ,input,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama staff,pur.nik nik_staff,purchasing,memo');
 		$this->load->view('head');
 		$this->load->view('report/biro',$data);
 		$this->load->view('foot');
@@ -285,7 +285,7 @@ class Report extends CI_Controller {
 
 	function memo($id = null, $edit = null){
 		$data['edit'] = $edit;
-		$data['purchase'] = $this->Dml_model->one('purchase', 'JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser JOIN pengguna kae ON kae.id = kakeuangan JOIN pengguna war ON wareknonakademik = war.id JOIN pengguna kag ON kabag = kag.id JOIN pengguna rek ON rektor = rek.id WHERE purchase.id = '.$id, 'purchase.id, purchase.tanggal, nomor, ref, biro.nama biro, purchase.status, kab.nama atasan, kab.nik nik_atasan, pur.nama pengaju, pur.gelar glr_pengaju, pur.nik nik_pengaju, war.nama wareknonakademik, war.gelar glr_wareknonakademik, war.nik nik_wareknonakademik,  kag.nama kabag, kag.gelar glr_kabag, rek.nama rektor, rek.gelar glr_rektor, rek.nik nik_rektor, kae.nama kakeuangan, kae.gelar glr_kakeuangan, note, nomemo, memo, purchasing');
+		$data['purchase'] = $this->Dml_model->one('purchase', 'JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser JOIN pengguna kae ON kae.id = kakeuangan JOIN pengguna war ON wareknonakademik = war.id JOIN pengguna kag ON kabag = kag.id JOIN pengguna rek ON rektor = rek.id WHERE purchase.id = '.$id, 'purchase.id, purchase.tanggal, nomor, ref, biro.nama biro, purchase.status, kab.nama atasan, kab.nik nik_atasan, pur.nama pengaju, pur.gelar glr_pengaju, pur.nik nik_pengaju, war.nama wareknonakademik, war.gelar glr_wareknonakademik, war.nik nik_wareknonakademik,  kag.nama kabag, kag.gelar glr_kabag, rek.nama rektor, rek.gelar glr_rektor, rek.nik nik_rektor, kae.nama kakeuangan, kae.gelar glr_kakeuangan, note, nomemo, memo, purchasing, level');
 		$data['purchase']['item'] = $this->putem($id);
 		$this->load->view('head');
 		$this->load->view('report/memo',$data);
@@ -311,7 +311,10 @@ class Report extends CI_Controller {
 			$value = $jenis.' != 0 AND';
 		}
 
-		$data['inventaris'] = $this->Dml_model->read('inventaris','JOIN biro ON biro.id = id_biro JOIN barang ON barang.id = id_barang JOIN pengguna ON pengguna.id = id_pengguna WHERE '.$value.' MONTH(inventaris.tanggal) = '.$bulan.' AND YEAR(inventaris.tanggal) = '.$tahun.$where, 'pengguna.nama pengguna, barang.nama barang, biro.nama biro, inventaris.id, id_purchase, id_barang, inventaris.tanggal, inventaris.keterangan'.$cols);
+		$data['inventaris'] = $this->Dml_model->read('inventaris','JOIN biro ON biro.id = id_biro JOIN barang ON barang.id = id_barang JOIN pengguna ON pengguna.id = id_pengguna WHERE inventaris.id_biro = '.$_SESSION['masuk']['id_biro'].' AND '.$value.' MONTH(inventaris.tanggal) = '.$bulan.' AND YEAR(inventaris.tanggal) = '.$tahun.$where, 'pengguna.nama pengguna, barang.nama barang, biro.nama biro, inventaris.id, id_purchase, id_barang, inventaris.tanggal, inventaris.keterangan'.$cols);
+		
+		$data['chart'] = $this->Dml_model->one('inventaris','JOIN biro ON biro.id = id_biro JOIN barang ON barang.id = id_barang JOIN pengguna ON pengguna.id = id_pengguna WHERE inventaris.id_biro = '.$_SESSION['masuk']['id_biro'].' AND MONTH(inventaris.tanggal) = '.$bulan.' AND YEAR(inventaris.tanggal) = '.$tahun, 'SUM(masuk) masuk, SUM(keluar) keluar');
+
 		$this->load->view('head');
 		$this->load->view('report/inventaris',$data);
 		$this->load->view('foot');
@@ -359,12 +362,12 @@ input purchase
 1 ['staff']
 2 ['kabiroumum']
 3 ['kabiro']
-9 ['kabag']
 4 ['purchaser']
 5 ['rektor']
 6 ['wareknonakademik']
 7 ['keuangan']
 8 ['kakeuangan']
+9 ['kabag']
 
 
 pembagian penyetujuan report

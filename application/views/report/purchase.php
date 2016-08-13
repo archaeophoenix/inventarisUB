@@ -112,6 +112,9 @@
 				<div class="box-footer">
 					<div class="box-footer text-right">
 						<button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
+						<?php if($level > 3){ ?>
+							<button type="button" class="btn btn-primary btn-circle" title="Report Order" onclick="window.location='<?php echo base_url().'report/order/'.$id ?>'"><i class="fa fa-angle-right"></i></button>
+						<?php } ?>
 					</div>
 				</div>
 			</form>

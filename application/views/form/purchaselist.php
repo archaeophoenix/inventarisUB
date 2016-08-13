@@ -60,11 +60,23 @@
                     <td class=""><?php echo $value['biro']; ?></td>
                     <td class="text-center"><?php echo $value['ref']; ?></td>
                     <td class="text-center" id="<?php echo $value['id'] ?>ntb">
-                      <?php if($value['status'] == 0){ ?>
-                      <button class="ntb btn btn-circle btn-danger" id="ntb<?php echo $value['id'] ?>" onclick="status(<?php echo $value['id'] ?>);">Belum Dianggarkan</button>
-                      <?php } else { echo 'Sudah Dianggarkan' ; } ?>
+                      <?php if($_SESSION['masuk']['izin'] == 2 && $value['status'] == 0){ ?>
+                        <button class="ntb btn btn-circle btn-danger" title="Belum Dianggarkan" id="ntb<?php echo $value['id'] ?>" onclick="window.location='<?php echo base_url().'purchase/status/'.$value['id'].'/1' ?>';"><i class="fa fa-close"></i></button>
+                        <button class="btn btn-circle btn-danger" title="Di Batalkan" rel="ntb<?php echo $value['id'] ?>" onclick="window.location='<?php echo base_url().'purchase/status/'.$value['id'].'/9' ?>';"><span class="fa fa-minus-circle"></span></button>                      
+                      <?php } ?>
+                      <?php if ($value['status'] == 1) {
+                        echo "Sudah Dianggarkan";
+                      } elseif ($value['status'] == 9) {
+                        echo "Di Batalkan";
+                      } else{
+                        if($_SESSION['masuk']['izin'] != 2){
+                          echo "Belum Dikonfirmasi";
+                        }
+                      } ?>
+                      <?php ?>
                     </td>
                     <td class="text-left">
+                    <?php if($value['status'] == 1){ ?>
                       <div class="btn-group">
                         <div class="btn-group">
                           <button aria-expanded="false" type="button" title="Report" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
@@ -84,9 +96,10 @@
                           </ul>
                         </div>
                       </div>
+                      <?php } ?>
                       <?php if(empty($id)){
-                        if($value['status'] == 0 && empty($value['ket'])){ ?>
-                      <button type="button" class="btn btn-xs btn-info btn-circle" title="Harga Baru" onclick="window.location='<?php echo base_url().'purchase/form/'.$value['id']; ?>'" id="edit<?php echo $value['id'];?>"><i class="fa fa-pencil-square-o"></i></button>
+                        if($_SESSION['masuk']['izin'] != 2 && $value['status'] == 0 && empty($value['ket'])){ ?>
+                      <button type="button" class="btn btn-xs btn-info btn-circle" title="Edit" onclick="window.location='<?php echo base_url().'purchase/form/'.$value['id']; ?>'" id="edit<?php echo $value['id'];?>"><i class="fa fa-pencil-square-o"></i></button>
                       <?php }} ?>
                     </td>
                   </tr>
@@ -98,7 +111,9 @@
         <!-- /.box-body -->
           <div class="box-footer">
             <div class="box-footer text-right">
+            <?php if($_SESSION['masuk']['izin'] != 2){ ?>
               <button type="button" onclick="window.location='<?php echo base_url(); ?>purchase/form'" class="btn btn-success btn-circle" title="Tambah Data"><i class="fa fa-plus"></i></button>
+            <?php } ?>
             </div>
           </div>
         </div>

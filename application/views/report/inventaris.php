@@ -45,45 +45,53 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-xs-6"></div>
 								</div>
 
 								<div class="row">
-									<div class="box-body table-responsive" style="padding: 25px;">
-										<table border="0" class="list1 table table-hover table-striped">
-											<thead>
-												<tr>
-													<td></td>
-													<th>#</th>
-													<th>Biro</th>
-													<th>Barang</th>
-													<th>Tanggal</th>
-													<th>Jumlah</th>
-													<th>Pengguna</th>
-													<th>Keterangan</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php foreach ($inventaris as $key => $value) { ?>
-												<tr>
-													<td class="text-center">
-													<?php if ($value['sisa'] > 0 && $value['id_purchase'] == 0 && $param['jenis'] != 'sisa') { ?>
-														<input type="checkbox" name="id[]" class="id_barang<?php echo $key;?>" id="<?php echo $value['id_barang'];?>" onclick="id_barang(<?php echo $key;?>)" value="<?php echo $value['id'];?>">
-														<input type="hidden" name="id_barang[]" id="id_barang<?php echo $key;?>">
+									<div class="col-xs-9">
+										<div class="box-body table-responsive" style="padding: 25px;">
+											<table border="0" class="list1 table table-hover table-striped">
+												<thead>
+													<tr>
+														<td></td>
+														<th>#</th>
+														<th>Biro</th>
+														<th>Barang</th>
+														<th>Tanggal</th>
+														<th>Jumlah</th>
+														<th>Pengguna</th>
+														<th>Keterangan</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php foreach ($inventaris as $key => $value) { ?>
+													<tr>
+														<td class="text-center">
+														<?php if ($value['sisa'] > 0 && $value['id_purchase'] == 0 && $param['jenis'] != 'sisa') { ?>
+															<input type="checkbox" name="id[]" class="id_barang<?php echo $key;?>" id="<?php echo $value['id_barang'];?>" onclick="id_barang(<?php echo $key;?>)" value="<?php echo $value['id'];?>">
+															<input type="hidden" name="id_barang[]" id="id_barang<?php echo $key;?>">
+														<?php } ?>
+														</td>
+														<td class="text-center">
+															<?php echo ($key + 1); ?>
+														</td>
+														<td class="text-center"><?php echo $value['biro']; ?></td>
+														<td class="text-center"><?php echo $value['barang']; ?></td>
+														<td class="text-center"><?php echo date("d F Y",strtotime($value['tanggal'])); ?></td>
+														<td class="text-center"><?php echo $value['sisa']; ?></td>
+														<td class="text-center"><?php echo $value['pengguna']; ?></td>
+														<td><?php echo $value['keterangan']; ?></td>
+													</tr>
 													<?php } ?>
-													</td>
-													<td class="text-center">
-														<?php echo ($key + 1); ?>
-													</td>
-													<td class="text-center"><?php echo $value['biro']; ?></td>
-													<td class="text-center"><?php echo $value['barang']; ?></td>
-													<td class="text-center"><?php echo date("d F Y",strtotime($value['tanggal'])); ?></td>
-													<td class="text-center"><?php echo $value['sisa']; ?></td>
-													<td class="text-center"><?php echo $value['pengguna']; ?></td>
-													<td><?php echo $value['keterangan']; ?></td>
-												</tr>
-												<?php } ?>
-											</tbody>
-										</table>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="col-xs-3">
+										<input type="hidden" id="masuk" value="<?php echo $chart['masuk'];?>">
+										<input type="hidden" id="keluar" value="<?php echo $chart['keluar'];?>">
+										<div class="chart-responsive"><div class="chart" id="sales-chart" style="position: relative;"></div>
 									</div>
 								</div>
 							</div>
@@ -92,9 +100,11 @@
 						<!-- /.box-body -->
 						<!-- box-footer -->
 						<div class="box-footer text-right">
+						<?php if($_SESSION['masuk']['izin'] != 2){ ?>
 							<button type="button" onclick="window.location='<?php echo base_url().'inventaris/form/masuk'; ?>'" class="btn btn-primary btn-circle" title="Barang Masuk"><i class="fa fa-download"></i></button>
 							<button type="button" onclick="window.location='<?php echo base_url().'inventaris/form/keluar'; ?>'" class="btn btn-info btn-circle batal" title="Barang Keluar"><i class="fa fa-upload"></i></button>
 							<button type="submit" class="btn btn-warning btn-circle" title="Edit"><i class="fa fa-pencil-square-o"></i></button>
+						<?php }?>
 							<button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
 						</div>
 					</form>

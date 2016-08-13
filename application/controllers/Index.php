@@ -6,11 +6,14 @@ class Index extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
-		$_SESSION['masuk'] = $this->Dml_model->one('pengguna','JOIN biro ON biro.id = id_biro WHERE pengguna.id = 4','pengguna.*, biro.nama biro');
     }
 
     function index(){
-		redirect('purchase/');
+        if (empty($_SESSION['masuk'])) {
+            $this->load->view('login');
+        } else {
+            redirect('purchase/');
+        }
     }
 
     function barang($param = null){

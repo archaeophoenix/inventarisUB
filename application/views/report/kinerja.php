@@ -148,7 +148,10 @@
             <?php } else { ?>
               <button type="button" onclick="window.location='<?php echo url.'/edit'; ?>'" class="btn btn-info btn-circle" title="Edit"><i class="fa fa-pencil-square-o"></i></button>
               <button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
-            <?php } ?>
+              <?php if(!empty($tanggal)){ ?>
+              <button type="button" class="btn btn-primary btn-circle" title="Report Checklist" onclick="window.location='<?php echo base_url().'report/check/'.$id_vendor ?>'"><i class="fa fa-angle-right"></i></button>
+              <?php }
+            } ?>
             </div>
           </form>
         </div>

@@ -94,9 +94,14 @@
                 <button type="reset" onclick="window.location='<?php echo url; ?>'" class="btn btn-warning btn-circle" title="ReSet"><i class="fa fa-undo"></i></button>
                 <button type="button" onclick="window.location='<?php echo url.'/..'; ?>'" class="btn btn-danger btn-circle batal" title="Batal"><i class="fa fa-close"></i></button>
               <?php } else { ?>
-                <button type="button" onclick="window.location='<?php echo url.'/edit'; ?>'" class="btn btn-info btn-circle" title="Edit"><i class="fa fa-pencil-square-o"></i></button>
+                <?php if($_SESSION['masuk']['izin'] != 2){ ?>
+                  <button type="button" class="btn btn-info btn-circle" title="Edit" onclick="window.location='<?php echo url.'/edit'; ?>'"><i class="fa fa-pencil-square-o"></i></button>
+                <?php }?>
                 <button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
-              <?php } ?>
+                <?php if($level > 6){ ?>
+                <button type="button" class="btn btn-primary btn-circle" title="Report Validasi" onclick="window.location='<?php echo base_url().'report/valid/'.$id ?>'"><i class="fa fa-angle-right"></i></button>
+                <?php }
+              } ?>
               </div>
             </form>
           </div>

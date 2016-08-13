@@ -154,9 +154,11 @@
               <?php if($edit == 'edit'){ ?>
               <button type="submit" class="btn btn-primary btn-circle" title="Simpan"><i class="fa fa-check"></i></button>
               <button type="reset" onclick="window.location='<?php echo url; ?>'" class="btn btn-warning btn-circle" title="ReSet"><i class="fa fa-undo"></i></button>
-              <button type="button" onclick="window.location='<?php echo url.'/../../../list/'.$param['tahun'].'/'.$param['bulan']; ?>'" class="btn btn-danger btn-circle batal" title="Batal"><i class="fa fa-close"></i></button>
+              <button type="button" onclick="window.location='<?php echo base_url().'Report/supplier/list/'.$param['tahun'].'/'.$param['bulan']; ?>'" class="btn btn-danger btn-circle batal" title="Batal"><i class="fa fa-close"></i></button>
             <?php } else { ?>
-              <button type="button" onclick="window.location='<?php echo url.'/../../../edit/'.$param['tahun'].'/'.$param['bulan']; ?>'" class="btn btn-info btn-circle" title="Edit"><i class="fa fa-pencil-square-o"></i></button>
+              <?php if($_SESSION['masuk']['izin'] != 2){ ?>
+                <button type="button" onclick="window.location='<?php echo base_url().'Report/supplier/edit/'.$param['tahun'].'/'.$param['bulan']; ?>'" class="btn btn-info btn-circle" title="Edit"><i class="fa fa-pencil-square-o"></i></button>
+              <?php }?>
               <button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
             <?php } ?>
             </div>

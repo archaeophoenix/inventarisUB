@@ -84,11 +84,17 @@ class Purchase extends CI_Controller {
 		$data['param'] = ['tahun' => $tahun, 'bulan' => $bulan];
     	$data['tahun'] = $this->Dml_model->read('purchase','','DISTINCT(YEAR(tanggal)) tahun');
 		$data['bulan'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    	$data['list'] = $this->Dml_model->read('purchase','JOIN biro ON id_biro = biro.id WHERE MONTH(tanggal) = '.$bulan.' AND YEAR(tanggal) = '.$tahun, 'purchase.id, purchasing, type, level, tanggal, ref, status, biro.nama biro, ket');
+    	$data['list'] = $this->Dml_model->read('purchase','JOIN biro ON id_biro = biro.id WHERE id_biro = '.$_SESSION['masuk']['id_biro'].' AND MONTH(tanggal) = '.$bulan.' AND YEAR(tanggal) = '.$tahun, 'purchase.id, purchasing, type, level, tanggal, ref, status, biro.nama biro, ket');
     	$data['link'] = [['Memo','memo'], ['Permintaan','permintaan'], ['Canvas','canvas'], ['Purchase','purchase'], ['Order','order'], ['Pembayaran','pembayaran'], ['Penerimaan','terima'], ['Validasi','valid'], ['Form Biro','biro']];
     	$this->load->view('head');
 		$this->load->view('form/purchaselist',$data);
 		$this->load->view('foot');
+    }
+
+    function status($id,$val){
+    	$status['status'] = $val;
+    	$this->Dml_model->update('purchase','`id` = '.$id,$status);
+		redirect('purchase/');
     }
 
 }

@@ -60,6 +60,22 @@ function kinerja(kategori,bobot,nilai){
 
 $(function () {
 
+  $('title').text('UB - '+$('h1').text());
+  if($('#param').val() == 'report/inventaris'){
+    var masuk = $("#masuk").val();
+    var keluar = $("#keluar").val();
+    var donut = new Morris.Donut({
+      element: 'sales-chart',
+      resize: true,
+      colors: ["#3c8dbc", "#f56954"],
+      data: [
+        {label: "Barang Masuk", value: masuk},
+        {label: "Barang Keluar", value: keluar}
+      ],
+      hideHover: 'auto'
+    });
+  }
+
   var ave = $('.evaluasi:checked').val();
   if(ave == 3){
     $('#syarat').removeAttr('disabled');
@@ -101,21 +117,31 @@ $(function () {
   } );*/
 
   $('.ntb').mouseout(function(){
-    var text = $(this).text();
+    var text = $(this).attr('title');
     var atr = (text == "Belum Dianggarkan") ? "btn-info" : "btn-danger" ;
+    var ico = (text == "Belum Dianggarkan") ? '<i class="fa fa-check"></i>' : '<i class="fa fa-close"></i>' ;
     var txt = (text == "Belum Dianggarkan") ? "Sudah Dianggarkan" : "Belum Dianggarkan" ;
-    $(this).text(txt);
+    $(this).html(ico);
     $(this).removeAttr('class');
     $(this).attr('class','ntb btn btn-circle '+atr);
+    $(this).removeAttr('class');
+    $(this).attr('class','ntb btn btn-circle '+atr);
+    $(this).removeAttr('title');
+    $(this).attr('title',txt);
   });
 
   $('.ntb').mouseover(function(){
-    var text = $(this).text();
+    var text = $(this).attr('title');
     var atr = (text == "Belum Dianggarkan") ? "btn-info" : "btn-danger" ;
+    var ico = (text == "Belum Dianggarkan") ? '<i class="fa fa-check"></i>' : '<i class="fa fa-close"></i>' ;
     var txt = (text == "Belum Dianggarkan") ? "Sudah Dianggarkan" : "Belum Dianggarkan" ;
-    $(this).text(txt);
+    $(this).html(ico);
     $(this).removeAttr('class');
     $(this).attr('class','ntb btn btn-circle '+atr);
+    $(this).removeAttr('class');
+    $(this).attr('class','ntb btn btn-circle '+atr);
+    $(this).removeAttr('title');
+    $(this).attr('title',txt);
   });
 
   $(".select2").select2();
@@ -142,7 +168,7 @@ $(function () {
     "autoWidth": false
   });
 
-  $('title').html("Inventaris | "+$('h1').text());
+  // $('title').html("Inventaris | "+$('h1').text());
 
   $(".datepicker").daterangepicker({
         singleDatePicker: true,
@@ -281,6 +307,7 @@ function status(id){
       var txt = (atad.status == 1) ? "Sudah Dianggarkan" : "Belum Dianggarkan" ;
       $('#ntb'+id).remove();
       $('#edit'+id).remove();
+      $('button[rel=ntb'+id+']').remove();
       $('#'+id+'ntb').append(txt);
      /*
       $('#ntb'+id).removeAttr('class');
@@ -291,23 +318,4 @@ function status(id){
       // alert("Form submitted successfully.\nReturned json: " + data["json"]);
     }
   });
-}
-
-function detail(id){
-  $('#staff').text($('#staff'+id).text());
-  $('#nik_staff').text('('+$('#nik_staff'+id).text()+')');
-  $('#purchaser').text($('#purchaser'+id).text());
-  $('#nik_purchaser').text('('+$('#nik_purchaser'+id).text()+')');
-  $('#keuangan').text($('#keuangan'+id).text());
-  $('#nik_keuangan').text('('+$('#nik_keuangan'+id).text()+')');
-  $('#kabiro').text($('#kabiro'+id).text());
-  $('#nik_kabiro').text('('+$('#nik_kabiro'+id).text()+')');
-  $('#kakeuangan').text($('#kakeuangan'+id).text());
-  $('#nik_kakeuangan').text('('+$('#nik_kakeuangan'+id).text()+')');
-  $('#kabiroumum').text($('#kabiroumum'+id).text());
-  $('#nik_kabiroumum').text('('+$('#nik_kabiroumum'+id).text()+')');
-  $('#wareknonakademik').text($('#wareknonakademik'+id).text());
-  $('#nik_wareknonakademik').text('('+$('#nik_wareknonakademik'+id).text()+')');
-  $('#rektor').text($('#rektor'+id).text());
-  $('#nik_rektor').text('('+$('#nik_rektor'+id).text()+')');
 }

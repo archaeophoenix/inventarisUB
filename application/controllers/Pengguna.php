@@ -29,9 +29,11 @@ class Pengguna extends CI_Controller {
 
 	function submit(){
 		//update menggantikan posisi pengguna
-		$pengguna = $this->Dml_model->one('pengguna','WHERE id = '.$_POST['id']);
-		if($pengguna['id_biro'] != $_POST['id_biro']){
-			$this->Dml_model->update('pengguna','aktiv = 1 AND id_biro = '.$_POST['id_biro'].' AND status = '.$_POST['status'],['aktiv' => 0]);
+		if (!empty($_POST['id'])) {
+			$pengguna = $this->Dml_model->one('pengguna','WHERE id = '.$_POST['id']);
+			if($pengguna['id_biro'] != $_POST['id_biro']){
+				$this->Dml_model->update('pengguna','aktiv = 1 AND id_biro = '.$_POST['id_biro'].' AND status = '.$_POST['status'],['aktiv' => 0]);
+			}
 		}
 
 		//get id_atasan

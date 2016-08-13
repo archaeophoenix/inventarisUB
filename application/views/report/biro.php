@@ -32,12 +32,12 @@
                   <label for="inputEmail3" class="col-sm-3 control-label">Nama Fasilitas <?php echo ucwords(strtolower($biro)); ?></label>
                   <div class="col-sm-9">
                     <!-- <textarea class="form-control" style="width:800px; height:100px;"></textarea> -->
-                    <p><?php echo $fasilitas; ?></p>
+                    <p><?php echo $purchasing; ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Deskripsi Fasilitas <?php echo ucwords(strtolower($biro)); ?></label>
-                  <div class="col-sm-9"><p><?php echo $deskripsi; ?></p></div>
+                  <div class="col-sm-9"><p><?php echo $memo; ?></p></div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-3 control-label">Tanggal Permintaan</label>

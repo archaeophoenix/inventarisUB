@@ -218,6 +218,9 @@
 <script src="<?php echo base_url(); ?>dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
+<!-- Morris -->
+<script src="<?php echo base_url(); ?>plugins/ui/raphael-min.js"></script>
+<script src="<?php echo base_url(); ?>plugins/morris/morris.min.js"></script>
 <!-- Select2 -->
 <script src="<?php echo base_url(); ?>plugins/select2/select2.full.min.js"></script>
 <!-- PrintElement -->
@@ -237,6 +240,7 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/ui/jquery-ui.css">
 <!-- Ionicons -->
 <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>plugins/ui/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -266,7 +270,6 @@
 <!-- Custom -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/custom/custom.css">
 <script src="<?php echo base_url(); ?>plugins/custom/custom.js"></script>
-
 
 </body>
 </html>

@@ -62,8 +62,8 @@ $ket = json_decode($ket,true);
 												<?php foreach ($vendor as $value) { ?>
 													<th class="text-center" ><?php echo $value['vendor'] ?></th>
 												<?php } ?>
-												<th class="text-center" >Budget</th>
-												<th class="text-center" >Nego</th>
+												<th class="text-center" width="10%">Budget</th>
+												<th class="text-center" width="10%">Nego</th>
 											</tr>
 											<?php $hrg = 0;
 											foreach ($item as $key => $value) { ?>
@@ -93,7 +93,7 @@ $ket = json_decode($ket,true);
 												</td>
 												<td class="text-center"><?php echo number_format($value['harga'],2,',','.'); $hrg += $value['harga']; ?></td>
 												<td class="text-center"><?php if($edit == 'edit'){ ?>
-													<input name="nego[<?php echo $value['id']; ?>]" class="form-control" type="number" value="<?php echo $value['nego']; ?>">
+													<input class="form-control" type="text" value="<?php echo $value['nego']; ?>" name="nego[<?php echo $value['id']; ?>]">
 													<?php } else { echo $value['nego']; } ?>
 												</td>
 											</tr>
@@ -128,7 +128,12 @@ $ket = json_decode($ket,true);
 												<th class="text-right" colspan="5">Delivery</th>
 												<?php foreach ($vendor as $value) { ?>
 													<td class="text-center" ><?php if($edit == 'edit'){ ?>
-														<input class="form-control" style="width: 80px;" name="ket[del][<?php echo $value['id_vendor'] ?>]" type="text" value="<?php echo $ket['del'][$value['id_vendor']]; ?>">
+														<select class="select2" name="ket[del][<?php echo $value['id_vendor']; ?>]">
+															<option></option>
+															<?php foreach ($deliver as $key => $eulav) {?>
+																<option <?php echo ($eulav == $ket['del'][$value['id_vendor']]) ? 'selected="selected"' : '' ;?> eulav="<?php echo $eulav;?>"><?php echo $eulav;?></option>
+															<?php } ?>
+														</select>
 														<?php } else { echo $ket['del'][$value['id_vendor']]; } ?>
 													</td>
 												<?php } ?>
@@ -142,7 +147,12 @@ $ket = json_decode($ket,true);
 												<th class="text-right" colspan="5">Term Of Payment</th>
 												<?php foreach ($vendor as $value) { ?>
 													<td class="text-center" ><?php if($edit == 'edit'){ ?>
-														<input class="form-control" style="width: 80px;" name="ket[top][<?php echo $value['id_vendor'] ?>]" type="text" value="<?php echo $ket['top'][$value['id_vendor']]; ?>">
+														<select class="select2" name="ket[top][<?php echo $value['id_vendor']; ?>]">
+															<option></option>
+															<?php foreach ($pay as $key => $eulav) {?>
+																<option <?php echo ($eulav == $ket['top'][$value['id_vendor']]) ? 'selected="selected"' : '' ;?> eulav="<?php echo $eulav;?>"><?php echo $eulav;?></option>
+															<?php } ?>
+														</select>
 														<?php } else { echo $ket['top'][$value['id_vendor']]; } ?>
 													</td>
 												<?php } ?>

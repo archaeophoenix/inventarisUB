@@ -19,10 +19,10 @@
               <div class="box-body">
                 <div class="col-xs-8 form-horizontal">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Tanggal</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Tanggal<label style="color:#f00;">*</label></label>
                     <div class="col-sm-3">
                     <?php if ($edit == 'edit' && empty($ctanggal)){ ?>
-                      <input type="text" class="text-center form-control datepicker" name="ctanggal" value="<?php echo date("d-m-Y"); ?>">
+                      <input required="required" type="text" class="text-center form-control datepicker" name="ctanggal" value="<?php echo date("d-m-Y"); ?>">
                     <?php } else {
                       echo '<label class="text-center">'.date("d-m-Y",strtotime($ctanggal)).'</label>';
                     } ?>
@@ -94,7 +94,7 @@
                   <div class="col-xs-8">
                     <?php $cont = ['gaof', 'kabaga']; 
                     foreach ($cont as $key => $value) {
-                      $html = ($edit == 'edit') ? '<div class="col-xs-4 text-center"><input type="text" class="form-control" name="' . $value . '" value="' . ${$value} . '"><br><input type="text" class="form-control" name="nik_' . $value . '" value="' . ${"nik_$value"} . '"></div>' : '<div class="col-xs-4 text-center"><label>' . ${$value} . '<br>' . ${"nik_$value"} . '<label></div>'; 
+                      $html = ($edit == 'edit') ? '<div class="col-xs-4 text-center"><input required="required" type="text" class="form-control" name="' . $value . '" value="' . ${$value} . '"><br><input required="required" type="text" class="form-control" name="nik_' . $value . '" value="' . ${"nik_$value"} . '"></div>' : '<div class="col-xs-4 text-center"><label>' . ${$value} . '<br>' . ${"nik_$value"} . '<label></div>'; 
                       echo $html; 
                     } ?>
                   </div>

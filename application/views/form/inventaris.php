@@ -33,15 +33,15 @@
               <table class="table table-hover table-striped">
                 <thead>
                   <tr>
-                    <th class="text-center">Barang</th>
+                    <th class="text-center">Barang<label style="color:#f00;">*</label></th>
                     <th class="text-center">Merk</th>
                   <?php if ($jenis == 'masuk'){ ?>
-                    <th class="text-center">Harga</th>
-                    <th class="text-center">Label</th>
+                    <th class="text-center">Harga<label style="color:#f00;">*</label></th>
+                    <th class="text-center">Label<label style="color:#f00;">*</label></th>
                   <?php } else { ?>
                     <th class="text-center">Sisa Barang</th>
                   <?php } ?>
-                    <th class="text-center">Jumlah</th>
+                    <th class="text-center">Jumlah<label style="color:#f00;">*</label></th>
                     <th class="text-center">Alokasi</th>
                     <th class="text-center">Keterangan</th>
                     <?php if($edit == 0){ ?>
@@ -64,8 +64,8 @@
                     <td><p id="sisa1" class="text-right">&nbsp;</p></td>
                   <?php } ?>
                     <td><input required="required" type="number" pattern="[0-9]" name="jumlah[]" placeholder="1000" class="form-control"></td>
-                    <td><input required="required" type="text" name="alokasi[]" placeholder="Alokasi" class="form-control"></td>
-                    <td><input required="required" type="text" name="keterangan[]" placeholder="Keterangan" class="form-control"></td>
+                    <td><input type="text" name="alokasi[]" placeholder="Alokasi" class="form-control"></td>
+                    <td><input type="text" name="keterangan[]" placeholder="Keterangan" class="form-control"></td>
                     <td><p id="op1"><button type="button" onclick="minus(1)" class="btn btn-danger btn-xs btn-circle hapus" title="Hapus"><i class="fa fa-trash"></i></button></p></td>
                   </tr>
                 <?php } else { 

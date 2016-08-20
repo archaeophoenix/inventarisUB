@@ -27,20 +27,20 @@
 				      					<div class="col-xs-6 table-responsive">
 											<table class="table table-striped table-hover">
 												<tr>
-													<th width="20%">To</th>
+													<th width="20%">To<label style="color:#f00;">*</label></th>
 													<td>
 														<?php if ($edit == 'edit') { ?>
-															<input type="text" class="form-control" style="border:none;" name="to" placeholder="John" value="<?php echo $to ; ?>">
+															<input required="required" type="text" class="form-control" style="border:none;" name="to" placeholder="John" value="<?php echo $to ; ?>">
 														<?php } else {
 															echo ucfirst(strtolower($to));
 														} ?>
 													</td>
 												</tr>
 												<tr>
-													<th>Phone</th>
+													<th>Phone<label style="color:#f00;">*</label></th>
 													<td>
 														<?php if ($edit == 'edit') { ?>
-															<input type="text" class="form-control" style="border:none;" name="phone" placeholder="+6281****" value="<?php echo $phone ; ?>">
+															<input required="required" type="text" class="form-control" style="border:none;" name="phone" placeholder="+6281****" value="<?php echo $phone ; ?>">
 														<?php } else {
 															echo $phone;
 														} ?>
@@ -71,10 +71,10 @@
 				      					<div class="col-xs-6 table-responsive">
 											<table class="table table-striped table-hover">
 												<tr>
-													<th width="35%">Date</th>
+													<th width="35%">Date<label style="color:#f00;">*</label></th>
 													<td>
 														<?php if ($edit == 'edit') { $dates = (empty($dates)) ? date('d-m-Y') : $dates ; ?>
-															<input type="text" class="form-control datepicker" style="border:none;" name="dates" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo date("d-m-Y",strtotime($dates)); ?>">
+															<input required="required" type="text" class="form-control datepicker" style="border:none;" name="dates" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo date("d-m-Y",strtotime($dates)); ?>">
 														<?php } else {
 															echo (empty($dates)) ? '' : date("d-m-Y",strtotime($dates));
 														} ?>
@@ -143,7 +143,12 @@
 				      						<th width="20%">1) DELIVERY</th>
 				      						<td>
 												<?php if ($edit == 'edit') { ?>
-													<input type="text" class="form-control" style="border:none;" name="delivery" placeholder="DELIVERY" value="<?php echo $delivery ; ?>">
+													<select class="select2" name="delivery">
+														<option></option>
+														<?php foreach ($deliver as $key => $value) {?>
+															<option <?php echo ($value == $delivery) ? 'selected="selected"' : '' ;?> value="<?php echo $value;?>"><?php echo $value;?></option>
+														<?php } ?>
+													</select>
 												<?php } else {
 													echo ucfirst(strtolower($delivery));
 												} ?>
@@ -153,7 +158,12 @@
 				      						<th>2) PAYMENT</th>
 				      						<td>
 												<?php if ($edit == 'edit') { ?>
-													<input type="text" class="form-control" style="border:none;" name="payment" placeholder="PAYMENT" value="<?php echo $payment ; ?>">
+													<select class="select2" name="payment">
+														<option></option>
+														<?php foreach ($pay as $key => $value) {?>
+															<option <?php echo ($value == $payment) ? 'selected="selected"' : '' ;?> value="<?php echo $value;?>"><?php echo $value;?></option>
+														<?php } ?>
+													</select>
 												<?php } else {
 													echo ucfirst(strtolower($payment));
 												} ?>
@@ -197,20 +207,20 @@
 				          			<div class="col-xs-12 table-responsive">
 									<table class="table table-hover">
 										<tr>
-											<th width="20%">Signature</th>
+											<th width="20%">Signature<label style="color:#f00;">*</label></th>
 											<td>
 												<?php if ($edit == 'edit') { ?>
-													<input type="text" class="form-control" style="border:none;" name="signature" placeholder="signature" value="<?php echo $signature ; ?>">
+													<input required="required" type="text" class="form-control" style="border:none;" name="signature" placeholder="signature" value="<?php echo $signature ; ?>">
 												<?php } else {
 													echo ucfirst(strtolower($signature));
 												} ?>
 											</td>
 										</tr>
 										<tr>
-											<th>Name</th>
+											<th>Name<label style="color:#f00;">*</label></th>
 											<td>
 												<?php if ($edit == 'edit') { ?>
-													<input type="text" class="form-control" style="border:none;" name="sname" placeholder="Name" value="<?php echo $sname ; ?>">
+													<input required="required" type="text" class="form-control" style="border:none;" name="sname" placeholder="Name" value="<?php echo $sname ; ?>">
 												<?php } else {
 													echo ucfirst(strtolower($sname));
 												} ?>
@@ -220,7 +230,7 @@
 											<th>Date</th>
 											<td>
 												<?php if ($edit == 'edit') { $sdate = (empty($sdate)) ? date('d-m-Y') : $sdate ; ?>
-													<input type="text" class="form-control datepicker" style="border:none;" name="sdate" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo date("d-m-Y",strtotime($sdate)); ?>">
+													<input required="required" type="text" class="form-control datepicker" style="border:none;" name="sdate" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo date("d-m-Y",strtotime($sdate)); ?>">
 												<?php } else {
 													echo (empty($sdate)) ? '' : date("d-m-Y",strtotime($sdate));
 												} ?>
@@ -241,7 +251,7 @@
 							<?php if($edit == 'edit'){ ?>
 								<button type="submit" class="btn btn-primary btn-circle" title="Simpan"><i class="fa fa-check"></i></button>
 								<button type="reset" onclick="window.location='<?php echo url; ?>'" class="btn btn-warning btn-circle" title="ReSet"><i class="fa fa-undo"></i></button>
-								<button type="button" onclick="window.location='<?php echo url.'/..'; ?>'" class="btn btn-danger btn-circle batal" title="Batal"><i class="fa fa-close"></i></button>
+								<button type="button" onclick="window.location='<?php echo url.'/../../'.$id; ?>'" class="btn btn-danger btn-circle batal" title="Batal"><i class="fa fa-close"></i></button>
 							<?php } else { ?>
 								<?php if($_SESSION['masuk']['izin'] != 2){ ?>
 									<button type="button" class="btn btn-info btn-circle" title="Edit" onclick="window.location='<?php echo url.'/edit'; ?>'"><i class="fa fa-pencil-square-o"></i></button>

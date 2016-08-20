@@ -51,6 +51,8 @@ class Report extends CI_Controller {
 		$data['edit'] = $edit;
 		$data['purchase'] = $this->Dml_model->one('purchase','JOIN pengguna kab ON kab.id = kabiro JOIN pengguna kak ON kak.id = kakeuangan WHERE purchase.id = '.$id,'purchase.id, purchase.to, phone, fax, attn, dates, po, delivery, payment, other, signature, sname, sdate, kak.nama kakeuangan, kak.nik nik_kakeuangan, kab.nama kabiro, kab.nik nik_kabiro, ref, level');
 		$data['purchase']['item'] = $this->putem($id);
+		$data['deliver'] = ['Manifest', 'On-Process', 'On-Transit', 'Received On Destination', 'Delivered', 'Criss Cross', 'Cnee Unknown', 'AU to OPS', 'AU (Antar Ulang)', 'Redelivery', 'BA (Bad Address)', 'Closed Once Delivery Attempt', 'NTH (Not At Home?)'];
+		$data['pay'] = ['Belum dibayar', 'Uang Muka', 'Proses cicilan', 'Sudah dibayar'];
 
 		$record['id_pengguna'] = $_SESSION['masuk']['id'];
 		$record['keterangan'] = 'Membuka Report Purchase Order';
@@ -109,6 +111,10 @@ class Report extends CI_Controller {
 
 	function canvas($id = null, $edit = null){
 		$data['edit'] = $edit;
+
+		$data['deliver'] = ['Manifest', 'On-Process', 'On-Transit', 'Delivered'];
+		$data['pay'] = ['Belum dibayar', 'Uang Muka', 'Proses cicilan', 'Sudah dibayar'];
+
 		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kabiro = kab.id JOIN pengguna pur ON purchaser = pur.id WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama purchaser,pur.nik nik_purchaser,note,ket,level');
 
 		$data['item'] = $this->putem($id);
@@ -481,7 +487,6 @@ input purchase
 7 ['keuangan']
 8 ['kakeuangan']
 9 ['kabag']
-
 
 pembagian penyetujuan report
 login

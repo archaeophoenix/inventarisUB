@@ -28,9 +28,9 @@ $ro = (empty($id)) ? '' : 'disabled="disabled"' ;
               <div class="col-xs-6">
                 <form class="form-horizontal" method="post" action="<?php echo base_url().'harga/submit';?>">
                   <div class="form-group">
-                    <label for="Vendor" class="col-sm-2 control-label">Vendor</label>
-                    <div class="col-sm-10">
-                      <select id="Vendor" name="id_vendor" class="form-control select2" <?php echo $ro; ?>>
+                    <label for="Vendor" class="col-xs-2 control-label">Vendor<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10">
+                      <select required="required" id="Vendor" name="id_vendor" class="form-control select2" <?php echo $ro; ?>>
                       <option></option>
                       <?php foreach ($vendor as $key => $value){ ?>
                       <option <?php echo ($data['id_vendor'] == $value['id']) ? 'selected="selected"' : '' ; ?> value="<?php echo $value['id']; ?>"><?php echo $value['nama']; ?></option>
@@ -42,9 +42,9 @@ $ro = (empty($id)) ? '' : 'disabled="disabled"' ;
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="_barang" class="col-sm-2 control-label">Barang</label>
-                    <div class="col-sm-10">
-                      <input class="autocomplete form-control" value="<?php echo $data['barang']; ?>" id="_barang" placeholder="Barang" type="text" <?php echo $ro; ?>>
+                    <label for="_barang" class="col-xs-2 control-label">Barang<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10">
+                      <input required="required" class="autocomplete form-control" value="<?php echo $data['barang']; ?>" id="_barang" placeholder="Barang" type="text" <?php echo $ro; ?>>
                       <input value="<?php echo $data['id_barang']; ?>" type="hidden" name="id_barang" id="id_barang">
                     </div>
                     <?php if (!empty($id)){ ?>
@@ -52,8 +52,8 @@ $ro = (empty($id)) ? '' : 'disabled="disabled"' ;
                     <?php } ?>
                   </div>
                   <div class="form-group">
-                    <label for="harga" class="col-sm-2 control-label">Harga</label>
-                    <div class="col-sm-10"><input class="form-control" value="<?php echo $data['harga']; ?>" id="harga" name="harga" placeholder="1000" type="number" pattern="[0-9]"></div>
+                    <label for="harga" class="col-xs-2 control-label">Harga<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10"><input required="required" class="form-control" value="<?php echo $data['harga']; ?>" id="harga" name="harga" placeholder="1000" type="number" pattern="[0-9]"></div>
                   </div>
                 <div class="form-group text-right">
                   <button type="submit" class="btn btn-primary btn-circle" title="Simpan"><i class="fa fa-check"></i></button>

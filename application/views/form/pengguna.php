@@ -16,9 +16,9 @@
               <div class="col-xs-6">
                 <form class="form-horizontal" method="post" action="<?php echo base_url().'pengguna/submit/'.$data['id'];?>">
                   <div class="form-group">
-                    <label for="Vendor" class="col-sm-2 control-label">Biro</label>
-                    <div class="col-sm-10">
-                      <select id="Vendor" name="id_biro" class="form-control select2">
+                    <label for="Vendor" class="col-xs-3 control-label">Biro<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9">
+                      <select required="required" id="Vendor" name="id_biro" class="form-control select2">
                       <option></option>
                       <?php foreach ($biro as $key => $value){ ?>
                       <option <?php echo ($data['id_biro'] == $value['id']) ? 'selected="selected"' : '' ; ?> value="<?php echo $value['id']; ?>"><?php echo $value['nama']; ?></option>
@@ -27,28 +27,28 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="barang" class="col-sm-2 control-label">Nama</label>
-                    <div class="col-sm-10">
+                    <label for="barang" class="col-xs-3 control-label">Nama<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9">
                       <input value="<?php echo $data['id']; ?>" name="id" type="hidden">
-                      <input class="form-control" value="<?php echo $data['nama']; ?>" name="nama" id="barang" placeholder="Nama" type="text">
+                      <input required="required" class="form-control" value="<?php echo $data['nama']; ?>" name="nama" id="barang" placeholder="Nama" type="text">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="type" class="col-sm-2 control-label">Gelar</label>
-                    <div class="col-sm-10"><input class="form-control" value="<?php echo $data['gelar']; ?>" id="type" name="gelar" placeholder="gelar" type="text"></div>
+                    <label for="type" class="col-xs-3 control-label">Gelar<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9"><input required="required" class="form-control" value="<?php echo $data['gelar']; ?>" id="type" name="gelar" placeholder="gelar" type="text"></div>
                   </div>
                   <div class="form-group">
-                    <label for="type" class="col-sm-2 control-label">NIK</label>
-                    <div class="col-sm-10"><input class="form-control" value="<?php echo $data['nik']; ?>" id="type" name="nik" placeholder="NIK" type="text"></div>
+                    <label for="type" class="col-xs-3 control-label">NIK<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9"><input required="required" class="form-control" value="<?php echo $data['nik']; ?>" id="type" name="nik" placeholder="NIK" type="text"></div>
                   </div>
                   <div class="form-group">
-                    <label for="type" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10"><input class="form-control" value="" id="type" name="password" placeholder="password" type="password"></div>
+                    <label for="type" class="col-xs-3 control-label">Password<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9"><input required="required" class="form-control" value="" id="type" name="password" placeholder="password" type="password"></div>
                   </div>
                   <div class="form-group">
-                    <label for="Vendor" class="col-sm-2 control-label">Jabatan</label>
-                    <div class="col-sm-10">
-                      <select id="Vendor" name="status" class="form-control select2">
+                    <label for="Vendor" class="col-xs-3 control-label">Jabatan<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9">
+                      <select required="required" id="Vendor" name="status" class="form-control select2">
                       <option></option>
                       <?php foreach ($jabatan as $key => $value){ ?>
                       <option <?php echo ($data['status'] == ($key + 1)) ? 'selected="selected"' : '' ; ?> value="<?php echo ($key+1); ?>"><?php echo $value; ?></option>
@@ -57,9 +57,9 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="Vendor" class="col-sm-2 control-label">Hak Akses</label>
-                    <div class="col-sm-10">
-                      <select id="Vendor" name="izin" class="form-control select2">
+                    <label for="Vendor" class="col-xs-3 control-label">Hak Akses<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9">
+                      <select required="required" id="Vendor" name="izin" class="form-control select2">
                       <option></option>
                       <?php foreach ($izin as $key => $value){ ?>
                       <option <?php echo ($data['izin'] == $key && !empty($data['izin'])) ? 'selected="selected"' : '' ; ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>

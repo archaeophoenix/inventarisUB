@@ -141,7 +141,7 @@
                     <?php
                       $cont = ['buat','setuju'];
                       foreach ($cont as $key => $value) {
-                        $html = ($edit == 'edit') ? '<div class="col-xs-6 text-center"><input type="text" class="form-control" name="'.$value.'" value="'.${$value}.'"><br><input type="text" class="form-control" name="nik_'.$value.'" value="'.${"nik_$value"}.'"></div>' : '<div class="col-xs-4 text-center"><label>'.${$value}.'<br>'.${"nik_$value"}.'<label></div>' ;
+                        $html = ($edit == 'edit') ? '<div class="col-xs-6 text-center"><input required="required" type="text" class="form-control" name="'.$value.'" value="'.${$value}.'"><br><input required="required" type="text" class="form-control" name="nik_'.$value.'" value="'.${"nik_$value"}.'"></div>' : '<div class="col-xs-4 text-center"><label>'.${$value}.'<br>'.${"nik_$value"}.'<label></div>' ;
                         echo $html;
                       }
                     ?>

@@ -23,19 +23,19 @@
               <div class="col-xs-6">
                 <form class="form-horizontal" method="post" action="<?php echo base_url().'vendor/submit/'.$data['id'];?>">
                   <div class="form-group">
-                    <label for="nama" class="col-sm-2 control-label">Nama</label>
-                    <div class="col-sm-10">
+                    <label for="nama" class="col-xs-2 control-label">Nama<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10">
                     <input value="<?php echo $data['id']; ?>" name="id" type="hidden">
-                    <input class="form-control" value="<?php echo $data['nama']; ?>" name="nama" id="nama" placeholder="Vendor" type="text">
+                    <input required="required" class="form-control" value="<?php echo $data['nama']; ?>" name="nama" id="nama" placeholder="Vendor" type="text">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="telpon" class="col-sm-2 control-label">Telpon</label>
-                    <div class="col-sm-10"><input class="form-control" value="<?php echo $data['telpon']; ?>" id="telpon" name="telpon" placeholder="+6221xxx" type="text"></div>
+                    <label for="telpon" class="col-xs-2 control-label">Telpon<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10"><input required="required" class="form-control" value="<?php echo $data['telpon']; ?>" id="telpon" name="telpon" placeholder="+6221xxx" type="text"></div>
                   </div>
                   <div class="form-group">
-                    <label for="alamat" class="col-sm-2 control-label">Alamat</label>
-                    <div class="col-sm-10"><textarea id="alamat" name="alamat" placeholder="Jalan Aspal Gang Buntu" style="width: 100%; height: 80px; font-size: 13px; line-height: 15px; border: 0.1px solid #dddddd; padding: 10px;"><?php echo $data['alamat']; ?></textarea></div>
+                    <label for="alamat" class="col-xs-2 control-label">Alamat<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10"><textarea required="required" id="alamat" name="alamat" placeholder="Jalan Aspal Gang Buntu" style="width: 100%; height: 80px; font-size: 13px; line-height: 15px; border: 0.1px solid #dddddd; padding: 10px;"><?php echo $data['alamat']; ?></textarea></div>
                   </div>
                 <div class="form-group text-right">
                   <button type="submit" class="btn btn-primary btn-circle" title="Simpan"><i class="fa fa-check"></i></button>

@@ -16,12 +16,12 @@
               <div class="col-xs-6">
                 <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url().'purchase/file/'.$id;?>">
                   <div class="form-group">
-                    <label for="barang" class="col-xs-2 control-label">File</label>
-                    <div class="col-xs-10"><input class="btn btn-default btn-circle" name="file" type="file"></div>
+                    <label for="barang" class="col-xs-2 control-label">File<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10"><input required="required" class="btn btn-default btn-circle" name="file" type="file"></div>
                   </div>
                   <div class="form-group">
-                    <label for="barang" class="col-xs-2 control-label">Keterangan</label>
-                    <div class="col-xs-10"><textarea name="keterangan" class="col-xs-2 form-control"></textarea></div>
+                    <label for="barang" class="col-xs-2 control-label">Detail<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-10"><textarea required="required" name="keterangan" class="col-xs-2 form-control"></textarea></div>
                   </div>
                   <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary btn-circle" title="Simpan"><i class="fa fa-check"></i></button>

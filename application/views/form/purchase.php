@@ -28,9 +28,9 @@
               <div class="col-xs-3"></div>
               <div class="col-xs-6">
                 <div class="form-group">
-                  <label for="biro" class="col-xs-4 control-label">Nama Purchase</label>
+                  <label for="biro" class="col-xs-4 control-label">Nama Purchase<label style="color:#f00;">*</label></label>
                   <div class="col-xs-8">
-                    <input name="purchasing" value="<?php echo (empty($purchase['purchasing'])) ? '' : $purchase['purchasing']; ?>" type="text" class="form-control">
+                    <input required="required" name="purchasing" value="<?php echo (empty($purchase['purchasing'])) ? '' : $purchase['purchasing']; ?>" type="text" class="form-control">
                   </div>
                 </div>
               </div>
@@ -49,9 +49,9 @@
               </div>
               <div class="col-xs-3">
                 <div class="form-group">
-                  <label for="tanggal" class="col-xs-4 control-label">Tanggal</label>
+                  <label for="tanggal" class="col-xs-4 control-label">Tanggal<label style="color:#f00;">*</label></label>
                   <div class="col-xs-8">
-                    <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo (empty($purchase['tanggal'])) ? date('d-m-Y') : date("d-m-Y",strtotime($purchase['tanggal'])); ?>">
+                    <input required="required" type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo (empty($purchase['tanggal'])) ? date('d-m-Y') : date("d-m-Y",strtotime($purchase['tanggal'])); ?>">
                   </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
               </div>
               <div class="col-xs-3">
                 <div class="form-group">
-                  <label for="biro" class="col-xs-4 control-label">Jenis Purchase</label>
+                  <label for="biro" class="col-xs-4 control-label">Jenis<label style="color:#f00;">*</label> Purchase</label>
                   <div class="col-xs-8">
                     <?php $purchase['type'] = (empty($purchase['type'])) ? '' : $purchase['type'] ; ?>
                     <input type="radio" value="0" name="type" <?php echo ($purchase['type'] == 0) ? 'checked="checked"' : ''; ?>> Beli
@@ -85,11 +85,11 @@
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
-                  <th class="text-center" width="22%">Barang</th>
-                  <th class="text-center" width="8%">Jumlah</th>
+                  <th class="text-center" width="22%">Barang<label style="color:#f00;">*</label></th>
+                  <th class="text-center" width="8%">Jumlah<label style="color:#f00;">*</label></th>
                   <th class="text-center" width="20%">Merk</th>
                   <th class="text-center" width="30%">Spesifikasi</th>
-                  <th class="text-center" width="10%">Anggaran Perbarang</th>
+                  <th class="text-center" width="10%">Anggaran Perbarang<label style="color:#f00;">*</label></th>
                   <th class="text-center" width="10%">Opsi</th>
                 </tr>
               </thead>

@@ -83,6 +83,7 @@
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu">
+                            <li><a class="text-left" onclick="window.location='<?php echo base_url().'purchase/scan/'.$value['id']; ?>'"><i class="fa fa-image"></i>Scan</a></li>
                             <?php foreach ($link as $key => $val) { ?>
                               <li><a class="text-left" onclick="window.location='<?php echo base_url().'report/'.$val[1].'/'.$value['id']; ?>'"><i class="fa fa-file"></i>&nbsp;<?php echo $val[0]; ?></a></li>
                             <?php

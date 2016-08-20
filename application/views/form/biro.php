@@ -23,11 +23,11 @@
               <div class="col-xs-6">
                 <form class="form-horizontal" method="post" action="<?php echo base_url().'biro/submit/';?>">
                   <div class="form-group">
-                    <label for="barang" class="col-sm-3 control-label">Nama Biro</label>
-                    <div class="col-sm-9">
+                    <label for="barang" class="col-xs-3 control-label">Nama Biro<label style="color:#f00;">*</label></label>
+                    <div class="col-xs-9">
                     <input value="<?php echo $data['id']; ?>" name="id" type="hidden">
                     <input value="<?php echo $data['nama']; ?>" name="old" type="hidden">
-                    <input class="form-control" value="<?php echo $data['nama']; ?>" name="nama" id="barang" placeholder="Nama Produk" type="text">
+                    <input required="required" class="form-control" value="<?php echo $data['nama']; ?>" name="nama" id="barang" placeholder="Nama Produk" type="text">
                     </div>
                   </div>
                 <div class="form-group text-right">

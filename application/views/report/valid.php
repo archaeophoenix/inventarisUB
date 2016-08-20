@@ -165,7 +165,7 @@ $ket = json_decode($ket,true);
                         <th class=" text-center"><br><br><br><?php echo $staff.'<br>'.$nik_staff; ?></th>
                         <?php $cons = ['dekan','pustaka'];
                           foreach ($cons as $key => $value){
-                            $field = ($edit == 'edit') ? '<td><input type="text" class="form-control" style="border:none;" name="'.$value.'" placeholder="'.$value.'" value="'.${$value}.'"><br><input type="text" class="form-control" style="border:none;" name="nik_'.$value.'" placeholder="NIK" value="'.${"nik_$value"}.'"></td>' : '<td class="text-center"><br>&nbsp;<br>&nbsp;<br>&nbsp;'.${$value}.'<br>'.${"nik_$value"}.'</td>';
+                            $field = ($edit == 'edit') ? '<td><input required="required" type="text" class="form-control" style="border:none;" name="'.$value.'" placeholder="'.$value.'" value="'.${$value}.'"><br><input required="required" type="text" class="form-control" style="border:none;" name="nik_'.$value.'" placeholder="NIK" value="'.${"nik_$value"}.'"></td>' : '<td class="text-center"><br>&nbsp;<br>&nbsp;<br>&nbsp;'.${$value}.'<br>'.${"nik_$value"}.'</td>';
                             echo $field;
                           } ?>
                         <th class=" text-center"><input type="hidden" name="ket[]" value='<?php echo $tek; ?>'><br><br><br><?php echo $keuangan.'<br>'.$nik_keuangan; ?></th>

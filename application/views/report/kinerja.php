@@ -22,10 +22,10 @@
               <div class="box-body">
                 <div class="col-xs-8 form-horizontal">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-xs-3 control-label">Tanggal</label>
+                    <label for="inputEmail3" class="col-xs-3 control-label">Tanggal<label style="color:#f00;">*</label></label>
                     <div class="col-xs-2">
                       <?php if ($edit == 'edit' && empty($tanggal)){ ?>
-                      <input type="text" value="<?php echo date("d-m-Y"); ?>" class="text-center form-control datepicker" name="tanggal">
+                      <input required="required" type="text" value="<?php echo date("d-m-Y"); ?>" class="text-center form-control datepicker" name="tanggal">
                       <?php } else {
                         echo '<label class="text-center">'.date("d-m-Y",strtotime($tanggal)).'</label>';
                       } ?>
@@ -130,7 +130,7 @@
                     <?php
                       $cont = ['eva','gaof','kabaga'];
                       foreach ($cont as $key => $value) {
-                        $html = ($edit == 'edit') ? '<div class="col-xs-4 text-center"><input type="text" class="form-control" name="'.$value.'" value="'.${$value}.'"><br><input type="text" class="form-control" name="nik_'.$value.'" value="'.${"nik_$value"}.'"></div>' : '<div class="col-xs-4 text-center"><label>'.${$value}.'<br>'.${"nik_$value"}.'<label></div>' ;
+                        $html = ($edit == 'edit') ? '<div class="col-xs-4 text-center"><input required="required" type="text" class="form-control" name="'.$value.'" value="'.${$value}.'"><br><input required="required" type="text" class="form-control" name="nik_'.$value.'" value="'.${"nik_$value"}.'"></div>' : '<div class="col-xs-4 text-center"><label>'.${$value}.'<br>'.${"nik_$value"}.'<label></div>' ;
                         echo $html;
                       }
                     ?>

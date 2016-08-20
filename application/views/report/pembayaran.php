@@ -26,21 +26,21 @@
 	          			<div class="col-xs-12">
 							<table class="table table-striped table-hover">
 								<tr>
-									<th width="20%">Kepada</th>
+									<th width="20%">Kepada<label style="color:#f00;">*</label></th>
 									<th class="text-left">
 										<?php if ($edit == 'edit') { ?>
 											<input type="hidden" name="id"  value="<?php echo $id ; ?>">
-											<input type="text" class="form-control" style="border:none;" name="kepada" placeholder="Kepada" value="<?php echo $kepada ; ?>">
+											<input required="required" type="text" class="form-control" style="border:none;" name="kepada" placeholder="Kepada" value="<?php echo $kepada ; ?>">
 										<?php } else {
 											echo ucfirst(strtolower($kepada));
 										} ?>
 									</th>
 								</tr>
 								<tr>
-									<th>Dari</th>
+									<th>Dari<label style="color:#f00;">*</label></th>
 									<th class="text-left">
 										<?php if ($edit == 'edit') { ?>
-											<input type="text" class="form-control" style="border:none;" name="dari" placeholder="Dari" value="<?php echo $dari ; ?>">
+											<input required="required" type="text" class="form-control" style="border:none;" name="dari" placeholder="Dari" value="<?php echo $dari ; ?>">
 										<?php } else {
 											echo ucfirst(strtolower($dari));
 										} ?>
@@ -57,10 +57,10 @@
 									</th>
 								</tr>
 								<tr>
-									<th>Tanggal</th>
+									<th>Tanggal<label style="color:#f00;">*</label></th>
 									<th class="text-left">
 										<?php if ($edit == 'edit') { $tanggalbayar = (empty($tanggalbayar)) ? date('d-m-Y') : $tanggalbayar ;?>
-											<input type="text" class="form-control datepicker" style="border:none;" name="tanggalbayar" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo date("d-m-Y",strtotime($tanggalbayar)); ?>">
+											<input required="required" type="text" class="form-control datepicker" style="border:none;" name="tanggalbayar" placeholder="<?php echo date('d-m-Y'); ?>" value="<?php echo date("d-m-Y",strtotime($tanggalbayar)); ?>">
 										<?php } else {
 											echo (empty($tanggalbayar)) ? '' : date("d-m-Y",strtotime($tanggalbayar));
 										} ?>
@@ -128,30 +128,30 @@
 	          							<th class="text-left">&nbsp;</th>
 	          						</tr>
 	          						<tr>
-	          							<th class="text-center">Nama</th>
+	          							<th class="text-center">Nama<label style="color:#f00;">*</label></th>
 	          							<th class="text-left">
 										<?php if ($edit == 'edit') { ?>
-											<input type="text" class="form-control" style="border:none;" name="nama" placeholder="Nama" value="<?php echo $nama ; ?>">
+											<input required="required" type="text" class="form-control" style="border:none;" name="nama" placeholder="Nama" value="<?php echo $nama ; ?>">
 										<?php } else {
 											echo ucfirst(strtolower($nama));
 										} ?>
 										</th>
 	          						</tr>
 	          						<tr>
-	          							<th class="text-center">Bank</th>
+	          							<th class="text-center">Bank<label style="color:#f00;">*</label></th>
 	          							<th class="text-left">
 										<?php if ($edit == 'edit') { ?>
-											<input type="text" class="form-control" style="border:none;" name="bank" placeholder="Bank" value="<?php echo $bank ; ?>">
+											<input required="required" type="text" class="form-control" style="border:none;" name="bank" placeholder="Bank" value="<?php echo $bank ; ?>">
 										<?php } else {
 											echo strtoupper($bank);
 										} ?>
 										</th>
 	          						</tr>
 	          						<tr>
-	          							<th class="text-center">No. Rek</th>
+	          							<th class="text-center">No. Rek<label style="color:#f00;">*</label></th>
 	          							<th class="text-left">
 										<?php if ($edit == 'edit') { ?>
-											<input type="text" class="form-control" style="border:none;" name="rekening" placeholder="Nomor Rekening" value="<?php echo $rekening ; ?>">
+											<input required="required" type="text" class="form-control" style="border:none;" name="rekening" placeholder="Nomor Rekening" value="<?php echo $rekening ; ?>">
 										<?php } else {
 											echo $rekening;
 										} ?>

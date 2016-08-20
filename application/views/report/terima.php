@@ -22,7 +22,7 @@
               <form role="form" method="post" action="<?php echo base_url().'report/postter/'.$id; ?>">
                 <?php
                   $tgl = (empty($tanggal_terima)) ? date('d-m-Y') : date("d-m-Y",strtotime($tanggal_terima)) ;
-                  $tanggal = ($edit == 'edit') ? '<div class="row"><div class="col-xs-2"><input type="text" class="text-center datepicker form-control" name="terima[tanggal_terima]" placeholder="'.date('d-m-Y').'" value="'.$tgl.'"></div></div>' : '<p>Tanggal : '.$tgl.'</p>';
+                  $tanggal = ($edit == 'edit') ? '<div class="row"><div class="col-xs-2"><input required="required" type="text" class="text-center datepicker form-control" name="terima[tanggal_terima]" placeholder="'.date('d-m-Y').'" value="'.$tgl.'"></div></div>' : '<p>Tanggal : '.$tgl.'</p>';
                   echo $tanggal;
                 ?>
                 <div class="box-body table-responsive no-padding">
@@ -78,7 +78,7 @@
                         <tr>
                           <?php $cons = ['serah','terima'];
                           foreach ($cons as $key => $value){
-                            $field = ($edit == 'edit') ? '<td><input type="text" class="form-control" style="border:none;" name="terima['.$value.']" placeholder="'.$value.'" value="'.${$value}.'"><br><input type="text" class="form-control" style="border:none;" name="terima[nik_'.$value.']" placeholder="NIK" value="'.${"nik_$value"}.'"></td>' : '<td class="text-center"><br>&nbsp;<br>&nbsp;<br>&nbsp;'.${$value}.'<br>'.${"nik_$value"}.'</td>';
+                            $field = ($edit == 'edit') ? '<td><input required="required" type="text" class="form-control" style="border:none;" name="terima['.$value.']" placeholder="'.$value.'" value="'.${$value}.'"><br><input required="required" type="text" class="form-control" style="border:none;" name="terima[nik_'.$value.']" placeholder="NIK" value="'.${"nik_$value"}.'"></td>' : '<td class="text-center"><br>&nbsp;<br>&nbsp;<br>&nbsp;'.${$value}.'<br>'.${"nik_$value"}.'</td>';
                             echo $field;
                           } ?>
                         </tr>

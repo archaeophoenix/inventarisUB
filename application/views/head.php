@@ -84,8 +84,8 @@
         <?php } if ($_SESSION['masuk']['status'] == 1){ ?>
         <li <?php echo ($path[1] == 'biro') ? 'class="active"' : '' ; ?>><a href="<?php echo base_url(); ?>biro"><i class="fa fa-flag"></i><span>Biro</span></a></li>
         <?php } ?>
-        <li <?php echo ($path[1] == 'inventaris') ? 'class="active"' : '' ; ?> "><a href="<?php echo base_url(); ?>report/inventaris"><i class="fa fa-cube"></i><span>Inventaris</span></a>
-        </li>
+        <li <?php echo ($path[1] == 'inventaris') ? 'class="active"' : '' ; ?> "><a href="<?php echo base_url(); ?>report/inventaris"><i class="fa fa-cube"></i><span>Inventaris</span></a></li>
+        <li <?php echo ($path[1] == 'record') ? 'class="active"' : '' ; ?> "><a href="<?php echo base_url(); ?>record"><i class="fa fa-angle-double-right "></i><span>Record</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

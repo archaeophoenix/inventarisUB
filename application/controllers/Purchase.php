@@ -6,6 +6,10 @@ class Purchase extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+        
+        if (empty($_SESSION['masuk'])) {
+            redirect('');
+        }
     }
 
     function item($data = null){
@@ -26,6 +30,11 @@ class Purchase extends CI_Controller {
 			redirect('purchase/');
 		}
 		$data['purchase']['item'] =  (empty($id)) ? null : $this->putem($id);
+		
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Form Purchase';
+		$this->Dml_model->create('record',$record);
+		
 		$this->load->view('head');
 		$this->load->view('form/purchase',$data);
 		$this->load->view('foot');
@@ -67,6 +76,12 @@ class Purchase extends CI_Controller {
 			$this->deitem(array('id_purchase' => $id));
 		    $item['id_purchase'] = $id;
 		}
+
+		$keterangan = (empty($id)) ? 'Input ' : 'Edit ' ;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = $keterangan.'data purchase '.$purchasing;
+		$this->Dml_model->create('record',$record);
 		
 	    foreach ($id_barang as $key => $value) {
 		    $item['id_barang'] = $value;
@@ -86,15 +101,43 @@ class Purchase extends CI_Controller {
 		$data['bulan'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
     	$data['list'] = $this->Dml_model->read('purchase','JOIN biro ON id_biro = biro.id WHERE id_biro = '.$_SESSION['masuk']['id_biro'].' AND MONTH(tanggal) = '.$bulan.' AND YEAR(tanggal) = '.$tahun, 'purchase.id, purchasing, type, level, tanggal, ref, status, biro.nama biro, ket');
     	$data['link'] = [['Memo','memo'], ['Permintaan','permintaan'], ['Canvas','canvas'], ['Purchase','purchase'], ['Order','order'], ['Pembayaran','pembayaran'], ['Penerimaan','terima'], ['Validasi','valid'], ['Form Biro','biro']];
+		
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Lihat List Purchase Periode Bulan '.$bulan.' Tahun '.$tahun;
+		$this->Dml_model->create('record',$record);
+    	
     	$this->load->view('head');
 		$this->load->view('form/purchaselist',$data);
 		$this->load->view('foot');
     }
 
     function status($id,$val){
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit Status Purchase';
+		$this->Dml_model->create('record',$record);
+
     	$status['status'] = $val;
     	$this->Dml_model->update('purchase','`id` = '.$id,$status);
 		redirect('purchase/');
+    }
+
+    function scan($id){
+    	$data['id'] = $id;
+		$data['img'] = $this->Dml_model->read('upload','WHERE id_purchase = '.$id);
+		$this->load->view('head');
+		$this->load->view('form/upload',$data);
+		$this->load->view('foot');
+    }
+
+    function file($id){
+    	extract($_POST);
+    	print_r($_FILES);
+    	$file = $this->Dml_model->uploads('file', 'images/upload', uniqid());
+    	$data['id_purchase'] = $id;
+    	$data['file'] = $file['name'];
+    	$data['keterangan'] = $keterangan;
+    	$this->Dml_model->create('upload',$data);
     }
 
 }

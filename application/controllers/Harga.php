@@ -6,6 +6,10 @@ class Harga extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		
+        if (empty($_SESSION['masuk'])) {
+            redirect('');
+        }
     }
 
     function index($id = null){
@@ -13,6 +17,11 @@ class Harga extends CI_Controller {
     	$data['list'] = $this->harga();
 		$data['data'] = (empty($id)) ? null : $this->harga($id) ;
     	$data['vendor'] = $this->Dml_model->read('vendor','ORDER BY id DESC');
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Halaman Harga';
+		$this->Dml_model->create('record',$record);
+
     	$this->load->view('head');
 		$this->load->view('form/harga',$data);
 		$this->load->view('foot');
@@ -32,6 +41,11 @@ class Harga extends CI_Controller {
 	    	$this->Dml_model->update('harga','`id` = '.$result['id'],$aktif);
     	    $this->Dml_model->create('harga',$_POST);
     	}
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Manipulasi Data Harga';
+		$this->Dml_model->create('record',$record);
+
     	redirect('harga/');
 	}
 

@@ -17,6 +17,14 @@ function periode(){
   window.location = url+''+param+'/'+bulan+'/'+tahun+'/'+jenis; //Relative or absolute path to response.php file
 }
 
+function edoirep(){
+  var url = $("#base").val();
+  var tahun = $("#tahun").val();
+  var bulan = $("#bulan").val();
+  var param = $("#param").val();
+  window.location = url+''+param+'/'+bulan+'/'+tahun; //Relative or absolute path to response.php file
+}
+
 function supplier(){
   var url = $("#base").val();
   var edit = $("#edit").val();
@@ -31,6 +39,14 @@ function supplier(){
 function id_barang(id){
   var id_barang = $('.id_barang'+id).attr('id');
   $('#id_barang'+id).val(id_barang);
+}
+
+function modal(id){
+  var keterangan = $('#keterangan'+id).val();
+  var file = $('#file'+id).val();
+  $('#img').attr('src',file);
+  $('#txt').text(keterangan);
+  console.log(keterangan);
 }
 
 function kinerja(kategori,bobot,nilai){

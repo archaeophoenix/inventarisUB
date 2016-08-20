@@ -6,12 +6,21 @@ class Biro extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		
+        if (empty($_SESSION['masuk'])) {
+            redirect('');
+        }
     }
 
     function index($id = null){
 		$data['id'] = $id;
     	$data['list'] = $this->biro();
 		$data['data'] = (empty($id)) ? null : $this->biro($id) ;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Halaman Biro';
+		$this->Dml_model->create('record',$record);
+
     	$this->load->view('head');
 		$this->load->view('form/biro',$data);
 		$this->load->view('foot');
@@ -34,6 +43,11 @@ class Biro extends CI_Controller {
 		    	$this->Dml_model->update('biro','`id` = '.$id);
 	    	}
     	}
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Manipulasi Data Biro';
+		$this->Dml_model->create('record',$record);
+
     	redirect('biro/');
 	}
 

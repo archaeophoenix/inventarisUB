@@ -14,10 +14,21 @@ class Log extends CI_Controller {
 
     	$_SESSION['masuk'] = (empty($result)) ? '' : $result ;
 
+
+        $record['id_pengguna'] = $_SESSION['masuk']['id'];
+        $record['keterangan'] = $result['nama'].' Masuk Aplikasi';
+        $this->Dml_model->create('record',$record);
+
+
     	redirect('');
     }
 
     function out(){
+
+        $record['id_pengguna'] = $_SESSION['masuk']['id'];
+        $record['keterangan'] = $_SESSION['masuk']['nama'].' Keluar Aplikasi';
+        $this->Dml_model->create('record',$record);
+
     	session_destroy();
     	redirect('');
     }

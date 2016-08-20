@@ -6,6 +6,10 @@ class Report extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		
+        if (empty($_SESSION['masuk'])) {
+            redirect('');
+        }
     }
 
     function putem($idpurchase){
@@ -17,6 +21,11 @@ class Report extends CI_Controller {
 	function purchase($id){
 		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama staff,pur.nik nik_staff,level');
 		$data['purchase']['item'] = $this->putem($id);
+		
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Purchase Request';
+		$this->Dml_model->create('record',$record);
+		
 		$this->load->view('head');
 		$this->load->view('report/purchase',$data);
 		$this->load->view('foot');
@@ -28,6 +37,11 @@ class Report extends CI_Controller {
 		$inventaris = $this->Dml_model->read('inventaris','WHERE id_purchase = '.$id,'id');
 		$data['inventaris'] = (empty($inventaris)) ? 0 : 1 ;
 		$data['purchase']['item'] = $this->putem($id);
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Permintaan Barang';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/permintaan',$data);
 		$this->load->view('foot');
@@ -37,6 +51,11 @@ class Report extends CI_Controller {
 		$data['edit'] = $edit;
 		$data['purchase'] = $this->Dml_model->one('purchase','JOIN pengguna kab ON kab.id = kabiro JOIN pengguna kak ON kak.id = kakeuangan WHERE purchase.id = '.$id,'purchase.id, purchase.to, phone, fax, attn, dates, po, delivery, payment, other, signature, sname, sdate, kak.nama kakeuangan, kak.nik nik_kakeuangan, kab.nama kabiro, kab.nik nik_kabiro, ref, level');
 		$data['purchase']['item'] = $this->putem($id);
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Purchase Order';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/order',$data);
 		$this->load->view('foot');
@@ -46,6 +65,11 @@ class Report extends CI_Controller {
 		$_POST['dates'] = date("Y-m-d",strtotime($_POST['dates']));
 		$_POST['sdate'] = date("Y-m-d",strtotime($_POST['sdate']));
 		$_POST['level'] = 5;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit data Purchase Order';
+		$this->Dml_model->create('record',$record);
+
 		$this->Dml_model->update('purchase','id = '.$id,$_POST);
 		redirect('report/order/'.$id);
 	}
@@ -61,6 +85,11 @@ class Report extends CI_Controller {
 		}*/
 		/*echo "<pre>";
 		print_r($data);die();*/
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Permohonan Pembayaran';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/pembayaran',$data);
 		$this->load->view('foot');
@@ -69,6 +98,11 @@ class Report extends CI_Controller {
 	function postpem($id){
 		$_POST['tanggalbayar'] = date("Y-m-d",strtotime($_POST['tanggalbayar']));
 		$_POST['level'] = 6 ;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit data Permohonan Pembayaran';
+		$this->Dml_model->create('record',$record);
+
 		$this->Dml_model->update('purchase','id = '.$id,$_POST);
 		redirect('report/pembayaran/'.$id);
 	}
@@ -106,6 +140,11 @@ class Report extends CI_Controller {
 			}
 			/*echo "<pre>";
 			print_r($data);die();*/
+
+			$record['id_pengguna'] = $_SESSION['masuk']['id'];
+			$record['keterangan'] = 'Membuka Report Canvas';
+			$this->Dml_model->create('record',$record);
+
 			$this->load->view('head');
 			$this->load->view('report/canvas',$data);
 			$this->load->view('foot');
@@ -126,6 +165,11 @@ class Report extends CI_Controller {
 		$purchase['ket'] = json_encode($ket) ;
 		$purchase['note'] = $note ;
 		$purchase['level'] = 4 ;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit Report Canvas';
+		$this->Dml_model->create('record',$record);
+
 		$this->Dml_model->update('purchase','id = '.$id,$purchase);
 		redirect('report/canvas/'.$id);
 	}
@@ -137,6 +181,11 @@ class Report extends CI_Controller {
 		$putem = $this->putem($id);
 		$inventaris = $this->Dml_model->read('inventaris','WHERE id_purchase = '.$id.' ORDER BY id_barang ASC','id_barang, alokasi');
 		$data['purchase']['item'] = (empty($inventaris)) ? $putem : array_replace_recursive($putem, $inventaris);
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report BASTB';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/terima',$data);
 		$this->load->view('foot');
@@ -170,6 +219,11 @@ class Report extends CI_Controller {
 			$check['id_biro'] = $_SESSION['masuk']['id_biro'];
 			$this->Dml_model->create('inventaris', $check);
 		}
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit Report BASTB';
+		$this->Dml_model->create('record',$record);
+
 		redirect('report/terima/'.$id);
 	}
 
@@ -177,6 +231,11 @@ class Report extends CI_Controller {
 		$data['edit'] = $edit;
 		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna keu ON keu.id = keuangan JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id,purchase.tanggal,ref,ket,biro.nama biro,dekan,nik_dekan,pustaka,nik_pustaka, level, purchase.status,keu.nama keuangan,keu.nik nik_keuangan,pur.nama staff,pur.nik nik_staff');
 		$data['purchase']['item'] = $this->putem($id);
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Validasi';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/valid',$data);
 		$this->load->view('foot');
@@ -187,6 +246,11 @@ class Report extends CI_Controller {
 		unset($_POST['ket'][0]);
 		$_POST['ket'] = json_encode(array_replace_recursive($_POST['ket'],$ket));
 		$_POST['level'] = 8 ;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit Report Validasi';
+		$this->Dml_model->create('record',$record);
+
 		$this->Dml_model->update('purchase','id = '.$id,$_POST);
 		redirect('report/valid/'.$id);
 	}
@@ -194,6 +258,11 @@ class Report extends CI_Controller {
 	function biro($id = null, $edit = null){
 		$data['edit'] = $edit;
 		$data['purchase'] = $this->Dml_model->one('purchase','JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser WHERE purchase.id = '.$id,'purchase.id, deskripsi, fasilitas, keterangan, estimasi, prioritas, pengadaan ,input,purchase.tanggal,ref,biro.nama biro,purchase.status,kab.nama kabiro,kab.nik nik_kabiro,pur.nama staff,pur.nik nik_staff,purchasing,memo');
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Biro';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/biro',$data);
 		$this->load->view('foot');
@@ -210,6 +279,11 @@ class Report extends CI_Controller {
 		$data['kategori'] = ['mutu', 'waktu', 'harga', 'bayar', 'respon'];
 		$data['kinerja'] = ['Mutu Produk / jasa', 'Waktu Kedatangan', 'Harga', 'Pembayaran', 'Fleksibilitas dan Respon'];
 		$data['penilaian'] = [['Melebihi persyaratan yang ditetapkan','Memenuhi persyaratan yang ditetapkan','Material memenuhi sebagian ditetapkan','Tidak memenuhi persyaratan yang ditetapkan'] , ['Sebelum deadline','Tepat waktu','Terlambat 1-7 hari','Terlambat melebihi 7 hari'], ['Lebih murah > 10% dari supplier lain','Lebih murah < 10% dari supplier lain','Sama dari supplier lain','Lebih mahal dari supplier lain'], ['45 hari','30 hari','Kurang dari 30 hari','Tunai'], ['Tanggapan sangat baik dan tindak lanjut memuaskan','Tanggapan cukup baik dan tindak lanjut memuaskan','Tanggapan lambat dan tindak lanjut memuaskan','Tanggapan lambat dan tindak lanjut tidak memuaskan']];
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Kinerja Vendor '.$data['evaluasi']['vendor'];
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/kinerja',$data);
 		$this->load->view('foot');
@@ -226,6 +300,11 @@ class Report extends CI_Controller {
 		$data['kategori'] = ['cwaktu', 'sesuai', 'jumlah', 'tepat', 'baru', 'fungsi'];
 		$data['choice'] = ['Ya', 'Tidak'];
 		$data['check'] = ['Apakah barang yang dibeli akan datang sesui dengan waktu yang telah di tentukan','Apakah jenis dan spesifikasi barang yang datang sudah sesuai dengan Purchase Order','Apakah jumlah barang yang diterima sudah sesuai dengan Purchase Order','Apakah barang diterima tepat waktu','Apakah barang di terima dalam kondisi baru','Apakah barang yang diterima sudah berfungsi dengan baik'];
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Checklist Vendor '.$data['checkx']['vendor'];
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/check',$data);
 		$this->load->view('foot');
@@ -241,8 +320,18 @@ class Report extends CI_Controller {
 		}
 		$result = $this->Dml_model->one('evaluasi','WHERE id_vendor = '.$id);
 		if(empty($result)){
+
+			$record['id_pengguna'] = $_SESSION['masuk']['id'];
+			$record['keterangan'] = 'Input Penilaian Kinerja Vendor';
+			$this->Dml_model->create('record',$record);
+
 			$this->Dml_model->create('evaluasi',$_POST);
 		} else {
+
+			$record['id_pengguna'] = $_SESSION['masuk']['id'];
+			$record['keterangan'] = 'Edit Penilaian Kinerja Vendor';
+			$this->Dml_model->create('record',$record);
+
 			$this->Dml_model->update('evaluasi','id_vendor = '.$id,$_POST);
 		}
 		redirect('report/'.$type.'/'.$id);
@@ -261,6 +350,11 @@ class Report extends CI_Controller {
 		$data['tahun'] = $this->Dml_model->read('evaluasi','','DISTINCT(YEAR(tanggal)) tahun');
 		$data['evaluasi'] = $this->Dml_model->read('evaluasi','JOIN vendor ON id_vendor = vendor.id WHERE YEAR(tanggal) = '.$tahun.' AND MONTH(tanggal) = '.$bulan.' '.$jenis,'vendor.id id, nama, kontak, hp, tanggal, jenis, mutu, waktu, harga, bayar, respon, evaluasi, syarat');
 		$data['bulan'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Supplier';
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/supplier',$data);
 		$this->load->view('foot');
@@ -274,11 +368,21 @@ class Report extends CI_Controller {
 		} else {
 			$this->Dml_model->update('supplier','WHERE tahun = '.$tahun.' AND bulan = '.$bulan,$_POST);
 		}
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit Report Supplier Periode Bulan '.$bulan.' Tahun '.$tahun;
+		$this->Dml_model->create('record',$record);
+
 		redirect('report/supplier/list/'.date('Y').'/'.date('m'));
 	}
 
 	function postmem($id){
 		$_POST['level'] = 2;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Edit Memo';
+		$this->Dml_model->create('record',$record);
+
 		$this->Dml_model->update('purchase','id = '.$id,$_POST);
 		redirect('report/memo/'.$id);
 	}
@@ -287,6 +391,11 @@ class Report extends CI_Controller {
 		$data['edit'] = $edit;
 		$data['purchase'] = $this->Dml_model->one('purchase', 'JOIN biro ON id_biro = biro.id JOIN pengguna kab ON kab.id = kabiro JOIN pengguna pur ON pur.id = purchaser JOIN pengguna kae ON kae.id = kakeuangan JOIN pengguna war ON wareknonakademik = war.id JOIN pengguna kag ON kabag = kag.id JOIN pengguna rek ON rektor = rek.id WHERE purchase.id = '.$id, 'purchase.id, purchase.tanggal, nomor, ref, biro.nama biro, purchase.status, kab.nama atasan, kab.nik nik_atasan, pur.nama pengaju, pur.gelar glr_pengaju, pur.nik nik_pengaju, war.nama wareknonakademik, war.gelar glr_wareknonakademik, war.nik nik_wareknonakademik,  kag.nama kabag, kag.gelar glr_kabag, rek.nama rektor, rek.gelar glr_rektor, rek.nik nik_rektor, kae.nama kakeuangan, kae.gelar glr_kakeuangan, note, nomemo, memo, purchasing, level');
 		$data['purchase']['item'] = $this->putem($id);
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Memo '.$data['purchase']['purchasing'];
+		$this->Dml_model->create('record',$record);
+
 		$this->load->view('head');
 		$this->load->view('report/memo',$data);
 		$this->load->view('foot');
@@ -314,6 +423,10 @@ class Report extends CI_Controller {
 		$data['inventaris'] = $this->Dml_model->read('inventaris','JOIN biro ON biro.id = id_biro JOIN barang ON barang.id = id_barang JOIN pengguna ON pengguna.id = id_pengguna WHERE inventaris.id_biro = '.$_SESSION['masuk']['id_biro'].' AND '.$value.' MONTH(inventaris.tanggal) = '.$bulan.' AND YEAR(inventaris.tanggal) = '.$tahun.$where, 'pengguna.nama pengguna, barang.nama barang, biro.nama biro, inventaris.id, id_purchase, id_barang, inventaris.tanggal, inventaris.keterangan'.$cols);
 		
 		$data['chart'] = $this->Dml_model->one('inventaris','JOIN biro ON biro.id = id_biro JOIN barang ON barang.id = id_barang JOIN pengguna ON pengguna.id = id_pengguna WHERE inventaris.id_biro = '.$_SESSION['masuk']['id_biro'].' AND MONTH(inventaris.tanggal) = '.$bulan.' AND YEAR(inventaris.tanggal) = '.$tahun, 'SUM(masuk) masuk, SUM(keluar) keluar');
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Report Inventaris Periode Bulan '.$bulan.' Tahun '.$tahun;
+		$this->Dml_model->create('record',$record);
 
 		$this->load->view('head');
 		$this->load->view('report/inventaris',$data);

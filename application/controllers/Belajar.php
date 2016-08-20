@@ -108,4 +108,18 @@ class Belajar extends CI_Controller {
         print_r($data4);*/
     }
 
+
+    function img(){
+        $data = [['q' => 'w'],['q' => 'w'],['q' => 'w'],['q' => 'w'],['q' => 'w'],['q' => 'w'],['q' => 'w'],['q' => 'w'],['q' => 'w']];
+        $o = '<table><tr>';
+        foreach ($data as $key => $value) {
+            
+            $i = ((($key+1) % 3) == 0) ? '</tr><tr>' : '' ;
+
+            $o .= '<td>'.$value['q'].'</td>'.$i;
+        }
+
+        echo $o.'</tr></table>';
+    }
+
 }

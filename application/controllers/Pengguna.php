@@ -6,6 +6,10 @@ class Pengguna extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		
+		if (empty($_SESSION['masuk'])) {
+            redirect('');
+        }
     }
 
     function index($id = null){
@@ -16,6 +20,11 @@ class Pengguna extends CI_Controller {
     	$data['jabatan'] = ['staff', 'kabiroumum', 'kabiro', 'purchaser', 'rektor', 'wareknonakademik', 'keuangan', 'kakeuangan', 'kabag'];
     	$cont = ['id' => '', 'nama' => '', 'gelar' => '', 'tanggal' => '', 'nik' => '', 'password' => '', 'id_biro' => '', 'id_atasan' => '', 'izin' => '', 'status' => '', 'aktiv' => '', 'biro' => ''];
     	$data['data'] = (empty($id)) ? $cont : $this->pengguna($id) ;
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Membuka Halaman Pengguna';
+		$this->Dml_model->create('record',$record);
+
     	$this->load->view('head');
 		$this->load->view('form/pengguna',$data);
 		$this->load->view('foot');
@@ -72,6 +81,11 @@ class Pengguna extends CI_Controller {
 		if(($_POST['status']+1) > 2 && ($_POST['status']+1) <= 4){
 			$this->Dml_model->update('pengguna','aktiv = 1 AND id_biro = '.$_POST['id_biro'].' AND status = '.($_POST['status']+1), ['id_atasan' => $_POST['id']]);
 		}
+
+
+		$record['id_pengguna'] = $_SESSION['masuk']['id'];
+		$record['keterangan'] = 'Menipulasi Data Pengguna';
+		$this->Dml_model->create('record',$record);
 		
 		redirect('pengguna/');
 	}

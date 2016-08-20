@@ -6,6 +6,10 @@ class Inventaris extends CI_Controller {
 		$this->load->model('Dml_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+
+        if (empty($_SESSION['masuk'])) {
+            redirect('');
+        }
     }
 
     function index(){
@@ -29,6 +33,11 @@ class Inventaris extends CI_Controller {
 			}
     	}
     	$permintaan['inventaris'] = 1;
+
+        $record['id_pengguna'] = $_SESSION['masuk']['id'];
+        $record['keterangan'] = 'Input Inventaris Dari Report Permintaan';
+        $this->Dml_model->create('record',$record);
+
     	$this->Dml_model->update('purchase', 'id = '.$id, $permintaan);
     	redirect('report/permintaan/'.$id);
     }
@@ -54,8 +63,18 @@ class Inventaris extends CI_Controller {
 			$inventaris['id_pengguna'] = $_SESSION['masuk']['id'];
 			print_r($inventaris);
 			if ($edit == 0) {
+
+                $record['id_pengguna'] = $_SESSION['masuk']['id'];
+                $record['keterangan'] = 'Input Data Inventaris';
+                $this->Dml_model->create('record',$record);
+
 				$this->Dml_model->create('inventaris',$inventaris);
 			} else {
+
+                $record['id_pengguna'] = $_SESSION['masuk']['id'];
+                $record['keterangan'] = 'Edit Data Inventaris';
+                $this->Dml_model->create('record',$record);
+
 				$this->Dml_model->update('inventaris', 'id = '.$id[$key], $inventaris);
 			}
     	}
@@ -80,6 +99,11 @@ class Inventaris extends CI_Controller {
 		/*echo $id;
 		print_r($data);
 		die();*/
+
+        $record['id_pengguna'] = $_SESSION['masuk']['id'];
+        $record['keterangan'] = 'Membuka Form Inventaris';
+        $this->Dml_model->create('record',$record);
+
     	$this->load->view('head');
 		$this->load->view('form/inventaris',$data);
 		$this->load->view('foot');

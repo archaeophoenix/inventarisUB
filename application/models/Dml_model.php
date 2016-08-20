@@ -43,7 +43,7 @@ class Dml_model extends CI_Model {
         $this->db->delete($table, $where); 
     }
 
-    function upload($data, $url = null, $rename = null){
+    function uploads($data, $url = null, $rename = null){
         $files = $_FILES[$data];
         $name = $files['name'];
         move_uploaded_file($files['tmp_name'], "$url/".$name);
@@ -65,6 +65,21 @@ class Dml_model extends CI_Model {
     function dates($data){
         $date = date("Y-m-d",strtotime($data));
         return $date;
+    }
+
+    function upload($data, $url = null, $rename = null){
+        $files = $_FILES[$data];
+        $name = $files['name'];
+        move_uploaded_file($files['tmp_name'], "$url/".$name);
+        if (!is_null($rename)) {
+            $tipe = explode(".", $name);
+            $rename = $rename.".".end($tipe);
+            rename("$url/".$name, "$url/".$rename);
+            $files['name'] = $rename;
+            $name = $rename;
+        }
+        chmod("$url/".$name, 0777);
+        return $files;
     }
 
     /*function reading($table, $id = null){

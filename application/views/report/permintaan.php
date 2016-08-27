@@ -104,7 +104,7 @@
 							<button type="button" class="btn btn-primary btn-circle" title="Tambah ke Inventaris" onclick="window.location='<?php echo base_url()."inventaris/permintaan/".$purchase['id'];?>';"><i class="fa fa-cube"></i></button>
 						<?php } ?>
 						<button type="button" onclick="window.print();" class="btn btn-success btn-circle" title="Cetak"><i class="fa fa-print"></i></button>
-						<?php if($purchase['level'] > 1){ ?>
+						<?php if($purchase['level'] > 1 && $purchase['type'] == 0){ ?>
 						<button type="button" class="btn btn-primary btn-circle" title="Report Canvas" onclick="window.location='<?php echo base_url().'report/canvas/'.$purchase['id'] ?>'"><i class="fa fa-angle-right"></i></button>
 						<?php } ?>
 					</div>

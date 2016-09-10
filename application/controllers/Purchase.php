@@ -132,12 +132,19 @@ class Purchase extends CI_Controller {
 
     function file($id){
     	extract($_POST);
-    	print_r($_FILES);
-    	$file = $this->Dml_model->uploads('file', 'images/upload', uniqid());
-    	$data['id_purchase'] = $id;
-    	$data['file'] = $file['name'];
-    	$data['keterangan'] = $keterangan;
-    	$this->Dml_model->create('upload',$data);
+	    print_r($_FILES);
+    	$gambar = $_FILES['file']['type'];
+    	// die();
+
+    	if($gambar == 'image/gif' || $gambar == 'image/svg' || $gambar == 'image/jpeg' || $gambar == 'image/png'){
+	    	$file = $this->Dml_model->uploads('file', 'images/upload', uniqid());
+	    	$data['id_purchase'] = $id;
+	    	$data['file'] = $file['name'];
+	    	$data['keterangan'] = $keterangan;
+	    	$this->Dml_model->create('upload',$data);
+		}
+
+		redirect('purchase/scan/'.$id);
     }
 
 }
